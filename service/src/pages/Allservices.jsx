@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { NavLink, useLoaderData, useLocation } from 'react-router';
-import Eachgroup from '../components/Eachgroup';
+ 
 import { valueContext } from '../Rootlayout';
 import Lottie from 'lottie-react';
+import Eachservice from '../components/Eachservice';
  
 const Allservices = () => {
      const groups=useLoaderData()
