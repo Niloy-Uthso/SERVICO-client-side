@@ -1,0 +1,69 @@
+import {
+  createBrowserRouter,
+  
+} from "react-router";
+import Rootlayout from "../Rootlayout";
+import Home from "../pages/Home";
+import Login from "../components/Login";
+import Register from "../components/Register";
+import ErrorPage from "../pages/ErrorPage";
+import Myservice from "../pages/Myservice";
+import Newservice from "../pages/Newservice";
+import Allservices from "../pages/Allservices";
+import Servicedetails from "../pages/Servicedetails";
+import Updateservice from "../pages/Updateservice";
+
+ 
+
+ export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component:Rootlayout,
+     errorElement:<ErrorPage></ErrorPage>,
+    children:[
+
+        {
+            path:"/",  
+            Component:Home,
+            // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+        },
+         {
+        path:"/login",
+         Component:Login
+     },
+     {
+      path:"/register",
+       Component:Register
+     },
+      {
+      path:"/myservice",
+      Component:Myservice, 
+    //   loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+     },
+     {
+        path:"/createservice",
+        Component:Newservice,
+        
+     },
+     {
+        path:"/services",
+         
+        Component:Allservices,
+        // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+     },
+     {
+        path:"/service/:id",
+        Component:Servicedetails,
+    //    loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
+     },
+     {
+        path:"/myservice/updateService/:id",
+        Component:Updateservice,
+        //  loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
+
+     }
+
+     
+    ]
+  },
+]);
