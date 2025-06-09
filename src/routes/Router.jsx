@@ -25,7 +25,11 @@ import Updateservice from "../pages/Updateservice";
         {
             path:"/",  
             Component:Home,
-            // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+            // loader:()=>fetch('http://localhost:3000/services'),
+             loader:()=>fetch('http://localhost:3000/services/limited')
+
+            //  /services/limited
+
         },
          {
         path:"/login",
@@ -38,7 +42,8 @@ import Updateservice from "../pages/Updateservice";
       {
       path:"/myservice",
       Component:Myservice, 
-    //   loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+      // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+      loader:()=>fetch('http://localhost:3000/services'),
      },
      {
         path:"/createservice",
@@ -50,16 +55,19 @@ import Updateservice from "../pages/Updateservice";
          
         Component:Allservices,
         // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
+        loader:()=>fetch('http://localhost:3000/services'),
      },
      {
         path:"/service/:id",
         Component:Servicedetails,
     //    loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
+       loader: ({ params }) => fetch(`http://localhost:3000/service/${params.id}`)
      },
      {
         path:"/myservice/updateService/:id",
         Component:Updateservice,
         //  loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
+         loader: ({ params }) => fetch(`http://localhost:3000/services/${params.id}`)
 
      }
 

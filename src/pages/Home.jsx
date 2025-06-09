@@ -8,7 +8,7 @@ import { valueContext } from '../Rootlayout';
 
 const Home = () => {
 
-    const groups=useLoaderData()
+    const services=useLoaderData()
 const {theme}=useContext(valueContext)
     const navigate=useNavigate()     
       const location=useLocation()
@@ -86,24 +86,25 @@ const {theme}=useContext(valueContext)
        
  <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8'>
             {
-                groups.slice(0, 6).map(group =>(
+                // services.slice(0, 6).
+               services.map(service =>(
               <Fade direction="up" triggerOnce>
-          <div className={`card ${theme?`bg-base-100`:`bg-slate-800 text-gray-100`} w-80 md:w-96 h-[100%] shadow-sm`}>
+          <div className={`card ${theme?`bg-base-100`:`bg-slate-800 text-gray-100`} w-80 md:w-96 h-full shadow-sm`}>
   <figure>
     <img className='w-full h-full'
-      src= {group.imageUrl}
+      src= {service.serviceImage}
       alt="Shoes"/>
   </figure>
   <div className="card-body">
     <h2 className="card-title">
-       {group.groupName}
-      <div className="badge badge-secondary">{group.category}</div>
+       {service.serviceTitle}
+      <div className="badge badge-secondary">Price:{service.price}</div>
     </h2>
-    <p>{group.description}</p>
+    <p>{service.description}</p>
     <div className="card-actions justify-end">
-      <div className="badge badge-outline">{group.startDate}</div>  
+       
       <NavLink state={{from:location.pathname}} className="badge badge-outline text-pink-600 hover:bg-pink-200 cursor-pointer" 
- to={`/group/${group._id}`}>See More!!</NavLink>
+ to={`/service/${service._id}`}>See More!!</NavLink>
           
     </div>
   </div>
@@ -114,7 +115,7 @@ const {theme}=useContext(valueContext)
             }
          </div>
 
-        <button  onClick={()=>navigate('/groups')} class="btn btn-soft btn-secondary">See all Groups</button>
+        <button  onClick={()=>navigate('/services')} class="btn btn-soft btn-secondary">See all Groups</button>
       </div>
         
         <Faq></Faq>

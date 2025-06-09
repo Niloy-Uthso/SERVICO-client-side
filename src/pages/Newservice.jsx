@@ -26,7 +26,7 @@ const Newservice = () => {
 
         const form =e.target;
         const formData=new FormData(form)
-        const hobbydata=Object.fromEntries(formData.entries())
+        const servicedata=Object.fromEntries(formData.entries())
          
 
         // fetch(' https://hobbyhub-server-nine.vercel.app/hobbier',{
@@ -41,12 +41,13 @@ const Newservice = () => {
         //     console.log('after adding',data)
         // })
 
-        fetch(' https://hobbyhub-server-nine.vercel.app/groups',{
+        fetch('http://localhost:3000/services',{
             method:'POST',
+            
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify(hobbydata)
+            body:JSON.stringify(servicedata)
         })
         .then(res=>res.json())
         .then(data =>{
@@ -76,27 +77,37 @@ const Newservice = () => {
 // </form> 
 //         </div>
 
+
 <div className="max-w-3xl md:mx-auto ml-2 mr-2 my-10 p-8 bg-white rounded-xl shadow-md">
-      <h2 className="text-3xl font-bold text-center mb-6 text-indigo-600">Create a Hobby Group</h2>
+      <h2 className="text-3xl font-bold text-center mb-6 text-indigo-600">Add a Service </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         
         <div>
-          <label className="block mb-1 font-medium">Group Name</label>
-          <input type="text" name="groupName" required className="input input-bordered w-full" />
+          <label className="block mb-1 font-medium">Service Name</label>
+          <input type="text" name="serviceTitle" required className="input input-bordered w-full" />
+        </div>
+
+  <div>
+          <label className="block mb-1 font-medium">Company Name</label>
+          <input type="text" name="companyName" required className="input input-bordered w-full" />
+        </div>
+  <div>
+          <label className="block mb-1 font-medium">Website</label>
+          <input type="text" name="website" required className="input input-bordered w-full" />
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Hobby Category</label>
+          <label className="block mb-1 font-medium">Service Category</label>
           <select name="category" required className="select select-bordered w-full">
             <option value="">Select a category</option>
-            <option>Painting</option>
-            <option>Photography</option>
-            <option>Video Gaming</option>
-            <option>Fishing</option>
-            <option>Running</option>
-            <option>Cooking</option>
-            <option>Reading</option>
-            <option>Writing</option>
+            <option>Technology & IT</option>
+            <option>Marketing</option>
+            <option>Business & Consulting</option>
+            <option>Creative & Media</option>
+            <option>Home Services</option>
+            <option>Education & Coaching</option>
+            <option>Health & Wellness</option>
+            <option>Others</option>
           </select>
         </div>
 
@@ -105,25 +116,21 @@ const Newservice = () => {
           <textarea name="description" required className="textarea textarea-bordered w-full" rows="4" />
         </div>
 
-        <div>
-          <label className="block mb-1 font-medium">Meeting Location</label>
-          <input type="text" name="meetingLocation" required className="input input-bordered w-full" />
-        </div>
-
+      
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block mb-1 font-medium">Max Members</label>
-            <input type="number" name="maxMembers" required className="input input-bordered w-full" />
+            <label className="block mb-1 font-medium">Price</label>
+            <input type="number" name="price" required className="input input-bordered w-full" />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Start Date</label>
-            <input type="date" name="startDate" required className="input input-bordered w-full" />
+            <label className="block mb-1 font-medium">Added Date</label>
+            <input type="date" name="addedDate" required className="input input-bordered w-full" />
           </div>
         </div>
 
         <div>
           <label className="block mb-1 font-medium">Image URL</label>
-          <input type="url" name="imageUrl" required className="input input-bordered w-full" />
+          <input type="url" name="serviceImage" required className="input input-bordered w-full" />
         </div>
 
         <div className="grid grid-cols-2 gap-4">

@@ -6,7 +6,7 @@ import Lottie from 'lottie-react';
 import Eachservice from '../components/Eachservice';
  
 const Allservices = () => {
-     const groups=useLoaderData()
+     const services=useLoaderData()
     //  const location=useLocation()
     const {theme}=useContext(valueContext)
      
@@ -16,8 +16,8 @@ const Allservices = () => {
             <h1 className={`text-4xl ${theme?``:`text-white`} font-bold`}>All groups</h1>
             <div data-aos="fade-up" className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8'>
                 {
-                    groups.map(group=>(
-                        <Eachservice key={group._id} group={group}></Eachservice>
+                    services.map(service=>(
+                        <Eachservice key={service._id} service={service}></Eachservice>
                     ))
                 }
             </div>

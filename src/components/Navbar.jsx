@@ -23,9 +23,9 @@ const Navbar = () => {
       <summary className="btn btn-sm btn-ghost text-white">☰</summary>
       <ul className={`menu menu-sm dropdown-content mt-3 p-2 shadow ${theme ? "bg-blue-900" : "bg-slate-700"} rounded-box w-52`}>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/mygroups">My Groups</NavLink></li>
-        <li><NavLink to="/createGroup">Create Groups</NavLink></li>
-        <li><NavLink to="/groups">All Groups</NavLink></li>
+        <li><NavLink to="/myservice">My Groups</NavLink></li>
+        <li><NavLink to="/createservice">Create Groups</NavLink></li>
+        <li><NavLink to="/services">All Groups</NavLink></li>
         {
           currentUser
             ? <li><button onClick={handlelogout}>Logout</button></li>
@@ -69,7 +69,7 @@ const Navbar = () => {
     </NavLink>
 
     <NavLink
-      to="/mygroups"
+      to="/myservice"
       className={({ isActive }) =>
         isActive
           ? 'text-indigo-400 text-sm font-bold'
@@ -79,7 +79,7 @@ const Navbar = () => {
     </NavLink>
 
     <NavLink
-      to="/createGroup"
+      to="/createservice"
       className={({ isActive }) =>
         isActive
           ? 'text-indigo-400 text-sm font-bold'
@@ -88,7 +88,7 @@ const Navbar = () => {
       Create Groups
     </NavLink>
     <NavLink
-      to="/groups"
+      to="/services"
       className={({ isActive }) =>
         isActive
           ? 'text-indigo-400 text-sm font-bold'
