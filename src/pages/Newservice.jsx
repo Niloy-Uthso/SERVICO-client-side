@@ -29,18 +29,7 @@ const Newservice = () => {
         const servicedata=Object.fromEntries(formData.entries())
          servicedata.allReviews = [];
          
-
-        // fetch(' https://hobbyhub-server-nine.vercel.app/hobbier',{
-        //     method:'POST',
-        //     headers:{
-        //         'content-type':'application/json'
-        //     },
-        //     body:JSON.stringify(hobbydata)
-        // })
-        // .then(res=>res.json())
-        // .then(data =>{
-        //     console.log('after adding',data)
-        // })
+ 
 
         fetch('http://localhost:3000/services',{
             method:'POST',
