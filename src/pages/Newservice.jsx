@@ -27,6 +27,7 @@ const Newservice = () => {
         const form =e.target;
         const formData=new FormData(form)
         const servicedata=Object.fromEntries(formData.entries())
+         servicedata.allReviews = [];
          
 
         // fetch(' https://hobbyhub-server-nine.vercel.app/hobbier',{

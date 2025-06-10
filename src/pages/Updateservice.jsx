@@ -4,7 +4,7 @@ import { valueContext } from '../Rootlayout';
 import Swal from 'sweetalert2';
 
 const Updateservice = () => {
-    const group=useLoaderData();
+    const service=useLoaderData();
      const {currentUser,loading}=useContext(valueContext)
           if(loading)
             return <div className="h-screen flex justify-center items-center bg-black">
@@ -23,17 +23,17 @@ const Updateservice = () => {
 const handleUpdate=(e)=>{
    
     e.preventDefault();
-     console.log('in',group._id)
+     
      const form =e.target;
         const formData=new FormData(form)
-        const updatedgroup=Object.fromEntries(formData.entries())
+        const updatedservice=Object.fromEntries(formData.entries())
          
-        fetch(`http://localhost:3000/myservice/updateService/${group._id}`,{
+        fetch(`http://localhost:3000/myservice/updateService/${service._id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify(updatedgroup)
+            body:JSON.stringify(updatedservice)
 
         })
         .then(res=>res.json())
@@ -64,53 +64,57 @@ const handleUpdate=(e)=>{
 
     return (
         <div className="max-w-3xl md:mx-auto  ml-2 mr-2  my-10 p-8 bg-white rounded-xl shadow-md">
-      <h2 className="text-3xl font-bold text-center mb-6 text-indigo-600">Update your group info</h2>
+      <h2 className="text-3xl font-bold text-center mb-6 text-indigo-600">Update your service info</h2>
       <form onSubmit={handleUpdate} className="space-y-5">
         
         <div>
-          <label className="block mb-1 font-medium">Group Name</label>
-          <input type="text" name="groupName" required defaultValue={group.groupName} className="input input-bordered w-full" />
+          <label className="block mb-1 font-medium">Service Name</label>
+          <input type="text" name="serviceTitle" required defaultValue={service.serviceTitle} className="input input-bordered w-full" />
         </div>
-
+  <div>
+          <label className="block mb-1 font-medium">Company Name</label>
+          <input type="text" name="companyName" required defaultValue={service.companyName} className="input input-bordered w-full" />
+        </div>
+  <div>
+          <label className="block mb-1 font-medium">Website</label>
+          <input type="text" name="website" required defaultValue={service.website} className="input input-bordered w-full" />
+        </div>
         <div>
-          <label className="block mb-1 font-medium">Hobby Category</label>
-          <select name="category" required defaultValue={group.category} className="select select-bordered w-full">
+          <label className="block mb-1 font-medium">Service Category</label>
+          <select name="category" required defaultValue={service.category} className="select select-bordered w-full">
             <option value="">Select a category</option>
-            <option>Drawing & Painting</option>
-            <option>Photography</option>
-            <option>Video Gaming</option>
-            <option>Fishing</option>
-            <option>Running</option>
-            <option>Cooking</option>
-            <option>Reading</option>
-            <option>Writing</option>
+            <option>Technology & IT</option>
+            <option>Marketing</option>
+            <option>Business & Consulting</option>
+            <option>Creative & Media</option>
+            <option>Home Services</option>
+            <option>Education & Coaching</option>
+            <option>Health & Wellness</option>
+            <option>Others</option>
           </select>
         </div>
 
         <div>
           <label className="block mb-1 font-medium">Description</label>
-          <textarea name="description" required defaultValue={group.description} className="textarea textarea-bordered w-full" rows="4" />
+          <textarea name="description" required defaultValue={service.description} className="textarea textarea-bordered w-full" rows="4" />
         </div>
 
-        <div>
-          <label className="block mb-1 font-medium">Meeting Location</label>
-          <input type="text" name="meetingLocation" required defaultValue={group.meetingLocation} className="input input-bordered w-full" />
-        </div>
+       
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block mb-1 font-medium">Max Members</label>
-            <input type="number" name="maxMembers" required defaultValue={group.maxMembers} className="input input-bordered w-full" />
-          </div>
+           <div>
+          <label className="block mb-1 font-medium">Price</label>
+          <input type="text" name="price" required defaultValue={service.price} className="input input-bordered w-full" />
+        </div>
           <div>
             <label className="block mb-1 font-medium">Start Date</label>
-            <input type="date" name="startDate" required defaultValue={group.startDate} className="input input-bordered w-full" />
+            <input type="date" name="addedDate" required defaultValue={service.addedDate} className="input input-bordered w-full" />
           </div>
         </div>
 
         <div>
           <label className="block mb-1 font-medium">Image URL</label>
-          <input type="url" name="imageUrl" required defaultValue={group.imageUrl} className="input input-bordered w-full" />
+          <input type="url" name="serviceImage" required defaultValue={service.serviceImage} className="input input-bordered w-full" />
         </div>
 
         <div className="grid grid-cols-2 gap-4">

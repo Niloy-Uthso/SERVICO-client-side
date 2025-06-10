@@ -36,7 +36,7 @@ const Myservice = () => {
 }).then((result) => {
   if (result.isConfirmed) {
 
-    fetch(`http://localhost:3000/services/${id}`,{
+    fetch(`http://localhost:3000/service/${id}`,{
         method:'DELETE'
     })
     .then(res=>res.json())

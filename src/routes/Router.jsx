@@ -67,7 +67,7 @@ import Updateservice from "../pages/Updateservice";
         path:"/myservice/updateService/:id",
         Component:Updateservice,
         //  loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
-         loader: ({ params }) => fetch(`http://localhost:3000/services/${params.id}`)
+         loader: ({ params }) => fetch(`http://localhost:3000/service/${params.id}`)
 
      }
 

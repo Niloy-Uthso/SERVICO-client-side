@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navigate, NavLink, useLoaderData, useLocation, useParams } from 'react-router';
 import { valueContext } from '../Rootlayout';
 import Swal from 'sweetalert2';
 
 const Servicedetails = () => {
   const { currentUser, loading } = useContext(valueContext);
+  
   const service = useLoaderData();
+  const [review,setReview]=useState(service.allReviews.includes(currentUser?.email))
+  const [reviewcount,setReviewcount]=useState(service.allReviews.length)
+  console.log(service.allReviews)
   const location=useLocation()
    
      const f= location?.state?.from
@@ -27,10 +31,16 @@ const Servicedetails = () => {
     Swal.fire({
   position: "top-end",
   icon: "success",
-  title: "Your have joined the group",
+  title: "Your have joined the service",
   showConfirmButton: false,
   timer: 1500
 });
+  }
+
+  const handleReview=()=>{
+    console.log('kjnsdk')
+    if(currentUser?.email===service.userEmail)
+      return alert('can not')
   }
    
   return (
@@ -84,11 +94,24 @@ const Servicedetails = () => {
       <p><span className="font-medium">Website:</span> <a href={service.website} target="_blank" rel="noreferrer" className="text-blue-500 underline">{service.website}</a></p>
     </div>
 
-    <div className="flex flex-wrap gap-2">
+<div className='flex justify-between'>
+ <div className="flex flex-wrap gap-2">
       <span className="badge badge-info">{service.category}</span>
       <span className="badge badge-outline">${service.price}</span>
-      <span className="badge badge-outline">Reviews: {service.totalReviewCount}</span>
+      <span className="badge badge-outline">Reviews: {reviewcount}</span>
     </div>
+    <div>
+      <button onClick={handleReview}>Add review</button>
+    </div>
+  <div className="dropdown dropdown-start">
+  <div tabIndex={0} role="button" className="btn m-1">Click ⬇️</div>
+  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <li><p>Item 1</p></li>
+    <li><p>Item 2</p></li>
+  </ul>
+</div>
+</div>
+   
 
     <p className="text-gray-700">{service.description}</p>
 
@@ -98,7 +121,7 @@ const Servicedetails = () => {
     </div>
 
     <div className="text-center mt-6">
-      <button className="btn btn-primary">Request This Service</button>
+      <button onClick={()=>handleJoin} className="btn btn-primary">Request This Service</button>
     </div>
 
     <NavLink to={f}>
