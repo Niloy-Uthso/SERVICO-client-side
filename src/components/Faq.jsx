@@ -1,76 +1,113 @@
 import React, { useContext, useState } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import { valueContext } from '../Rootlayout';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
-    question: "What is HobbyHub?",
-    answer: "HobbyHub is a platform where you can find, join, or create local hobby-based groups like painting circles, reading clubs, or hiking crews."
+    question: "What kind of services can I find on Servico?",
+    answer: "You can find a wide range of services, including home repairs, graphic design, tutoring, fitness coaching, and more—offered by local professionals."
   },
   {
-    question: "How do I create a new hobby group?",
-    answer: "Once you're logged in, go to the 'Create Group' page, fill in the required details, and submit. Your group will be live for others to discover."
+    question: "How do I book a service provider?",
+    answer: "Simply browse services, view provider profiles, and click 'See More' to contact them or book directly through the platform."
   },
   {
-    question: "Can I join multiple hobby groups?",
-    answer: "Absolutely! You can join as many groups as you like, as long as they are open and the start date hasn’t passed."
+    question: "Can I offer my own services?",
+    answer: "Yes! After signing in, go to 'Add Service' and provide your service details, pricing, and images. Your listing will go live immediately."
   },
   {
-    question: "What happens after I join a group?",
-    answer: "You'll gain access to the group's event details, updates, and communications. Stay tuned for meetups and activities!"
+    question: "Is there a rating or review system?",
+    answer: "Absolutely. After using a service, you can leave feedback to help others make informed decisions—and receive feedback to build your own credibility."
   },
   {
-    question: "Can I leave or delete a group I created?",
-    answer: "Yes. Visit the 'My Groups' section to update or delete any group you've created."
+    question: "Are payments handled through the site?",
+    answer: "Currently, payments are arranged directly between users and providers. We're working on secure integrated payments for future updates."
   }
 ];
 
 const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
- const {theme}=useContext(valueContext)
+  const { theme } = useContext(valueContext);
+
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className={`max-w-5xl md:mx-auto px-6 py-12 ${theme?`bg-gradient-to-br from-pink-50 to-purple-100 `:`bg-gradient-to-br from-purple-800 to-pink-800`} rounded-2xl shadow-xl ml-2 mr-2  mt-10`}>
+    <section
+      className={`max-w-6xl md:mx-auto px-6 py-14 rounded-3xl shadow-2xl ml-2 mr-2 mt-16 transition duration-500 ${
+        theme
+          ? 'bg-gradient-to-br from-sky-50 to-sky-100'
+          : 'bg-gradient-to-br from-gray-900 to-slate-900'
+      }`}
+    >
+      <h2
+        className={`text-4xl font-extrabold text-center mb-12 tracking-tight ${
+          theme ? 'text-indigo-700' : 'text-cyan-300'
+        }`}
+      >
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
+          <Typewriter
+            words={['Frequently Asked Questions']}
+            loop={100}
+            cursor
+            cursorStyle="|"
+            typeSpeed={100}
+            deleteSpeed={100}
+            delaySpeed={1000}
+          />
+        </span>
+      </h2>
 
-     
-
-      <h2 className={`text-4xl font-extrabold text-center ${theme?`text-purple-700`:`text-green-700`}  mb-10`}>
-        
-        <Typewriter
-                words={['Frequently Asked Questions']}
-                loop={100}
-                cursor
-                cursorStyle="|"
-                typeSpeed={100}
-                deleteSpeed={100}
-                delaySpeed={1000}
-              />
-        
-       </h2>
-      <div className="space-y-5">
+      <div className="space-y-6">
         {faqs.map((faq, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-white border border-purple-200 rounded-xl shadow hover:shadow-lg transition duration-300"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className={`rounded-xl border transition duration-300 ${
+              theme
+                ? 'bg-white/90 border-indigo-100 hover:shadow-indigo-200'
+                : 'bg-white/5 border-slate-700 hover:border-cyan-400 backdrop-blur-md'
+            } shadow hover:shadow-xl`}
           >
             <button
               onClick={() => toggle(index)}
-              className="w-full flex justify-between items-center px-6 py-4 text-left text-lg font-semibold text-purple-800"
+              className={`w-full flex justify-between items-center px-6 py-5 text-left text-lg font-semibold transition-all ${
+                theme ? 'text-indigo-800' : 'text-cyan-200'
+              }`}
             >
-              {faq.question}
-              <span className="text-2xl font-bold">
-                {openIndex === index ? '−' : '+'}
-              </span>
+              <span>{faq.question}</span>
+              <motion.span
+                initial={false}
+                animate={{ rotate: openIndex === index ? 45 : 0 }}
+                transition={{ duration: 0.2 }}
+                className={`text-3xl font-bold ${
+                  theme ? 'text-indigo-500' : 'text-cyan-400'
+                }`}
+              >
+                +
+              </motion.span>
             </button>
-            {openIndex === index && (
-              <div className="px-6 pb-4 text-gray-700 text-base">
-                {faq.answer}
-              </div>
-            )}
-          </div>
+
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`px-6 pb-5 leading-relaxed ${
+                    theme ? 'text-gray-700' : 'text-slate-300'
+                  }`}
+                >
+                  {faq.answer}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -44,11 +44,11 @@ const Newservice = () => {
             Swal.fire({
   position: "top-end",
   icon: "success",
-  title: "Your new group has been created",
+  title: "Your new service has been created",
   showConfirmButton: false,
   timer: 1500
 });
-            console.log('after adding',data)
+             
             form.reset()
         })
     }
@@ -114,7 +114,7 @@ const Newservice = () => {
           </div>
           <div>
             <label className="block mb-1 font-medium">Added Date</label>
-            <input type="date" name="addedDate" required className="input input-bordered w-full" />
+            <input type="date" name="addedDate" value={new Date().toISOString().split('T')[0]} className="input input-bordered w-full" />
           </div>
         </div>
 

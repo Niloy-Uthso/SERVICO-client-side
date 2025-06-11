@@ -3,54 +3,51 @@ import { Facebook, Instagram, Twitter, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-indigo-600 to-purple-800 text-white pt-12 pb-8 px-6 mt-16">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-4 sm:grid-cols-2 gap-8">
-        {/* Brand */}
-        <div>
-          <h2 className="text-3xl font-bold mb-3">HobbyHub</h2>
-          <p className="text-sm opacity-90">Connect with others. Share your passion. Explore hobbies in real life or online.</p>
-        </div>
-
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-xl font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a   className="hover:text-yellow-300 transition">Home</a></li>
-            <li><a href="/groups" className="hover:text-yellow-300 transition">Explore Groups</a></li>
-            <li><a   className="hover:text-yellow-300 transition">About Us</a></li>
-            <li><a   className="hover:text-yellow-300 transition">FAQs</a></li>
-          </ul>
-        </div>
-
-         
-        <div>
-          <h3 className="text-xl font-semibold mb-3">Contact</h3>
-          <ul className="text-sm space-y-2">
-            <li className="flex items-center gap-2">
-              <Mail size={16} /> support@hobbyhub.com
-            </li>
-            <li className="flex items-center gap-2">
-              <MapPin size={16} /> Kampala, Uganda
-            </li>
-          </ul>
-        </div>
-
+    <footer className="bg-gradient-to-tl from-[#1e1f4b] to-[#451952] text-white py-12 px-6 mt-20">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         
+        {/* Logo & Description */}
         <div>
-          <h3 className="text-xl font-semibold mb-3">Follow Us</h3>
+          <h2 className="text-3xl font-extrabold mb-3 tracking-wide text-yellow-300">Servico</h2>
+          <p className="text-sm text-gray-200 leading-relaxed">
+            Discover trusted services. Connect with skilled providers. Leave feedback. Build community trust.
+          </p>
+        </div>
+
+        {/* Quick Navigation */}
+        <div>
+          <h3 className="text-lg font-semibold text-yellow-200 mb-3">Navigation</h3>
+          <ul className="space-y-2 text-sm text-gray-300">
+            <li><a href="/" className="hover:text-yellow-300 transition-all duration-200">Home</a></li>
+            <li><a href="/services" className="hover:text-yellow-300 transition-all duration-200">Browse Services</a></li>
+            <li><a href="/myreviews" className="hover:text-yellow-300 transition-all duration-200">My Reviews</a></li>
+            <li><a href="/about" className="hover:text-yellow-300 transition-all duration-200">About Us</a></li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h3 className="text-lg font-semibold text-yellow-200 mb-3">Contact</h3>
+          <ul className="space-y-2 text-sm text-gray-300">
+            <li className="flex items-center gap-2"><Mail size={18} /> support@srvico.com</li>
+            <li className="flex items-center gap-2"><MapPin size={18} /> Dhaka, Bangladesh</li>
+          </ul>
+        </div>
+
+        {/* Social Links */}
+        <div>
+          <h3 className="text-lg font-semibold text-yellow-200 mb-3">Connect With Us</h3>
           <div className="flex gap-4">
-            <a href="https://www.facebook.com/nilnineteenforty.oynineteenfortysix?locale=fr_FR" className="hover:text-yellow-300"><Facebook /></a>
-            <a href="https://www.instagram.com/" className="hover:text-yellow-300"><Instagram /></a>
-            <a href="https://x.com/" className="hover:text-yellow-300"><Twitter /></a>
+            <a href="https://facebook.com" className="text-gray-300 hover:text-yellow-300 transition-all"><Facebook size={20} /></a>
+            <a href="https://instagram.com" className="text-gray-300 hover:text-yellow-300 transition-all"><Instagram size={20} /></a>
+            <a href="https://twitter.com" className="text-gray-300 hover:text-yellow-300 transition-all"><Twitter size={20} /></a>
           </div>
         </div>
       </div>
 
-      <hr className="my-6 border-indigo-300 opacity-30" />
-
-      <p className="text-center text-sm opacity-70">
-        © {new Date().getFullYear()} HobbyHub. All rights reserved.
-      </p>
+      <div className="border-t border-gray-500 mt-10 pt-4 text-center text-sm text-gray-400">
+        &copy; {new Date().getFullYear()} Servico. All rights reserved.
+      </div>
     </footer>
   );
 };

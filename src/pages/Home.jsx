@@ -5,7 +5,8 @@ import Feedback from '../components/Feedback';
 import { Typewriter } from 'react-simple-typewriter';
 import { Fade } from 'react-awesome-reveal';
 import { valueContext } from '../Rootlayout';
-
+import { motion } from 'framer-motion';
+import MeetOurPartners from '../components/MeetOurPartners';
 const Home = () => {
 
     const services=useLoaderData()
@@ -21,24 +22,29 @@ const {theme}=useContext(valueContext)
 //     imageUrl: "https://example.com/images/sketch.jpg"
     return (
         <div className='relative'>
-            <div className="absolute z-10 top-6 left-6 bg-white/70 px-4 py-2 rounded-md shadow-md">
-    <h1 className="text-2xl font-bold text-indigo-800">
-      <Typewriter
-        words={['Welcome to HobbyHub! Join Your Passion Group! Find Like-Minded Friends!']}
-        loop={100}
-        cursor
-        cursorStyle="|"
-        typeSpeed={100}
-        deleteSpeed={50}
-        delaySpeed={1000}
-      />
-    </h1>
-  </div>
+           <div className="absolute z-20 top-10 left-10 bg-white/80 backdrop-blur-md px-6 py-4 rounded-xl shadow-xl max-w-md">
+  <h1 className="text-xl md:text-2xl font-extrabold text-indigo-700 leading-snug">
+    <Typewriter
+      words={[
+        'Find Trusted Services Near You!',
+        'Offer Your Skills. Get Hired Fast!',
+        'Connect. Serve. Grow.',
+      ]}
+      loop={Infinity}
+      cursor
+      cursorStyle="|"
+      typeSpeed={80}
+      deleteSpeed={40}
+      delaySpeed={1200}
+    />
+  </h1>
+</div>
+
               <div className="carousel relative h-[70vh] w-full">
                
   <div id="slide1" className="carousel-item relative w-full">
     <img
-      src="https://i.ibb.co/rKWMxZty/blog-a560-1.webp"
+      src="https://i.ibb.co/PGGRp8q1/flat-car-repair-shop-services-social-media-cover-template-23-2149588342.jpg"
       className="w-full" />
     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a href="#slide4" className="btn btn-circle">❮</a>
@@ -47,7 +53,7 @@ const {theme}=useContext(valueContext)
   </div>
   <div id="slide2" className="carousel-item relative w-full">
     <img
-      src="https://i.ibb.co/9mHffWLt/Hobbies-803x490.jpg"
+      src="https://i.ibb.co/dwY5vghz/web-design-concept-banner-template-23-2148738715.jpg"
       className="w-full" />
     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a href="#slide1" className="btn btn-circle">❮</a>
@@ -56,7 +62,7 @@ const {theme}=useContext(valueContext)
   </div>
   <div id="slide3" className="carousel-item relative w-full">
     <img
-      src="https://i.ibb.co/Xk7H53Hn/hobby-01-1600x900.jpg"
+      src="https://i.ibb.co/8ngwcbKn/house-repair-facebook-timeline-cover-web-banner-template-612198-43.jpg"
       className="w-full" />
     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a href="#slide2" className="btn btn-circle">❮</a>
@@ -65,7 +71,7 @@ const {theme}=useContext(valueContext)
   </div>
   <div id="slide4" className="carousel-item relative w-full">
     <img
-      src="https://i.ibb.co/b5rGPVcD/another-word-for-hobby-eb9bfca630.png"
+      src="https://i.ibb.co/7J03XsHY/construction-facebook-cover-social-media-web-banner-template-873916-292.jpg"
       className="w-full" />
     <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
       <a href="#slide3" className="btn btn-circle">❮</a>
@@ -80,7 +86,7 @@ const {theme}=useContext(valueContext)
 
 
          <Fade direction="up" triggerOnce>
-        <h2 className="text-3xl font-bold text-indigo-600">Explore Hobby Groups</h2>
+        <h2 className="text-3xl font-extrabold text-white drop-shadow-md tracking-wide">Featured Services</h2>
          
       </Fade>
        
@@ -96,7 +102,7 @@ const {theme}=useContext(valueContext)
       alt="Shoes"/>
   </figure>
   <div className="card-body">
-    <h2 className="card-title">
+     < h2 className="card-title">
        {service.serviceTitle}
       <div className="badge badge-secondary">Price:{service.price}</div>
     </h2>
@@ -117,7 +123,7 @@ const {theme}=useContext(valueContext)
 
         <button  onClick={()=>navigate('/services')} class="btn btn-soft btn-secondary">See all Groups</button>
       </div>
-        
+        <MeetOurPartners></MeetOurPartners>
         <Faq></Faq>
 
         <Feedback></Feedback>

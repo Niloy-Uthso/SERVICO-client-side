@@ -13,7 +13,7 @@ const Allservices = () => {
     return (
        <div className='flex events flex-col p-4 pt-8 items-center  gap-10'>
          
-            <h1 className={`text-4xl ${theme?``:`text-white`} font-bold`}>All groups</h1>
+            <h1 className={`text-4xl ${theme?``:`text-white`} font-bold`}>All Services</h1>
             <div data-aos="fade-up" className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8'>
                 {
                     services.map(service=>(
@@ -22,7 +22,7 @@ const Allservices = () => {
                 }
             </div>
             <NavLink to={'/'}>
-                      <button class="btn btn-dash btn-accent">Back to Home</button>
+                      <button class="btn btn-dash btn-accent text-red-500">Back to Home</button>
             </NavLink>
             
         </div>

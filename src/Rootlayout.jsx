@@ -165,7 +165,7 @@ if (loading) {
   }
 
     return (
-        <div  className={`pacifico-regular relative ${theme?`bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500`:`bg-black`}`}>
+        <div  className={`relative ${theme ? `bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600` : `bg-neutral-900`}`}>
                <p onClick={()=>handleTheme()} className='absolute w-8  z-50 top-4 right-56 md:left-100'>{<FaCloudMoon className={`text-3xl ${theme?`text-yellow-400 hover:text-black`:`text-black hover:text-yellow-500`}  transition duration-300`} />}</p>
 <valueContext.Provider  value={context}>
             <Navbar></Navbar>

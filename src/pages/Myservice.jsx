@@ -62,7 +62,7 @@ const Myservice = () => {
 
   return (
     <div className='max-w-6xl mx-auto p-6'>
-      <h1 className='text-3xl font-bold text-center text-indigo-600 mb-6'>My Services</h1>
+      <h1 className='text-3xl font-bold text-center text-green-700 mb-6'>My Services</h1>
 
       <div className="overflow-x-auto shadow border rounded-lg">
         <table className="table w-full text-center">

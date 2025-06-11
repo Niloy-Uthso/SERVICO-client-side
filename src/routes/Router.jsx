@@ -12,6 +12,7 @@ import Newservice from "../pages/Newservice";
 import Allservices from "../pages/Allservices";
 import Servicedetails from "../pages/Servicedetails";
 import Updateservice from "../pages/Updateservice";
+import MyReviews from "../pages/Myreviews";
 
  
 
@@ -69,6 +70,11 @@ import Updateservice from "../pages/Updateservice";
         //  loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
          loader: ({ params }) => fetch(`http://localhost:3000/service/${params.id}`)
 
+     },
+     {
+      path:"/myreviews",
+      Component:MyReviews,
+      loader:()=>fetch('http://localhost:3000/services'),
      }
 
      

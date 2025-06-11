@@ -1,5 +1,5 @@
 {
-  "name": "hobbyhub-frontend",
+  "name": "service",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
     "firebase": "^11.7.3",
+    "framer-motion": "^12.17.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",

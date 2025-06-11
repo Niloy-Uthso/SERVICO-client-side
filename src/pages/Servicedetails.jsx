@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Navigate, NavLink, useLoaderData, useLocation, useParams } from 'react-router';
+import { Navigate, NavLink, useLoaderData, useLocation, useNavigate, useParams } from 'react-router';
 import { valueContext } from '../Rootlayout';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -8,13 +8,13 @@ const Servicedetails = () => {
   const { currentUser, loading } = useContext(valueContext);
   
   const service = useLoaderData();
-  const [review,setReview]=useState(service.allReviews.includes(false))
+  const [review,setReview]=useState(service.allReviews?.includes(false))
   const [reviewcount,setReviewcount]=useState(service.allReviews.length)
   const [showoff,setShowoff]=useState(service.allReviews || []);
-
+  const navigate = useNavigate();
   useEffect(()=>{
 // setReview(service?.allReviews?.includes(currentUser.email))
-setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUser.email));
+setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUser?.email));
  
 // const alreadyreviewed = service?.allReviews?.
 //  service?.allReviews?
@@ -34,9 +34,9 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
   width={8} />
       </div>
 
-  if (!currentUser?.email) {
-    return <Navigate state={{from:location.pathname}} to="/login" />;
-  }
+  // if (!currentUser?.email) {
+  //   return <Navigate state={{from:location.pathname}} to="/login" />;
+  // }
       
   const handleJoin=()=>{
     Swal.fire({
@@ -47,10 +47,18 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
   timer: 1500
 });
   }
+ 
 
   const handleReview=(e)=>{
     e.preventDefault()
+if (!currentUser?.email) {
+   navigate('/login', { state: { from: location.pathname } });
+  return
+  //  <Navigate state={{from:location.pathname}} to="/login" />;
+  }
+   
     const x=e.target.myreview.value
+    const y=e.target.date.value
     console.log(currentUser.displayName);
     
     if(currentUser?.email===service.userEmail)
@@ -60,7 +68,8 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
       name:currentUser?.displayName,
       email:currentUser?.email,
       myreview:x,
-      photo:currentUser?.photoURL
+      photo:currentUser?.photoURL,
+      date:y
       
     }).then(data=>{
         console.log(data.data)
@@ -134,32 +143,35 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
 
     <div className="text-sm text-gray-600">
       <p><span className="font-medium">Company:</span> {service.companyName}</p>
-      <p><span className="font-medium">Website:</span> <a href={service.website} target="_blank" rel="noreferrer" className="text-blue-500 underline">{service.website}</a></p>
+      <p><span className="font-medium">Website:</span> <span className="text-blue-500 underline">{service.website}</span></p>
     </div>
 
-<div className='flex justify-between'>
+    <div className='flex items-center justify-center gap-2 '>
+
+      <form className='' onSubmit={handleReview}>   
+        <div className=''>
+          <label className="block mb-3 ml-24 font-medium">Put your review</label>
+          <input type="text" name="myreview" disabled={!!review} className= "input input-bordered w-full mb-3"/>
+          <input type="text" name="date" readOnly className='text-center border mb-3 ' value={new Date().toISOString().split('T')[0]}/>
+        </div>
+        {/* <button onClick={handleReview}></button> */}
+        <button type="submit"  className="btn btn-secondary px-8 ml-16">{review?'You added a review.Can Delete now':'Add Review'}</button>
+      </form>
+      
+    </div>
+
+<div className='flex  justify-between'>
  <div className="flex flex-wrap gap-2">
       <span className="badge badge-info">{service.category}</span>
       <span className="badge badge-outline">${service.price}</span>
       <span className="badge badge-outline">Reviews: {reviewcount}</span>
     </div>
-    <div>
-
-      <form onSubmit={handleReview}>   
-        <div>
-          <label className="block mb-1 font-medium">Put your review</label>
-          <input type="text" name="myreview"  className="input input-bordered w-full" />
-        </div>
-        {/* <button onClick={handleReview}></button> */}
-        <button type="submit" className="btn btn-primary px-8">{review?'Delete review':'Add Review'}</button>
-      </form>
-      
-    </div>
+    
   <div className="dropdown dropdown-start">
-  <div tabIndex={0} role="button" className="btn m-1">Click ⬇️</div>
+  <div tabIndex={0} role="button" className="btn m-1">Click to see reviews ⬇️</div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
    {showoff.map((review, index) => (
-    <li key={index}>
+    <li className='mb-1' key={index}>
       <div className="flex items-start gap-4 p-4 border rounded-xl shadow-sm bg-white hover:shadow-md transition duration-300">
         <img
           src={review.reviewerPhoto}
@@ -169,6 +181,7 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
         <div>
           <h4 className="font-semibold text-lg text-indigo-600">{review.reviewerName}</h4>
           <p className="text-gray-600 mt-1">{review.reviewerReview}</p>
+          <p className='mt-1'>{review.reviewDate}</p> 
         </div>
       </div>
     </li>

@@ -12,9 +12,9 @@ const Navbar = () => {
      
     return (
         <>
-        <div className={`navbar px-4 py-2 ${theme ? `bg-blue-950` : `bg-slate-800`} shadow-sm`}>
+        <div className={`navbar px-4 py-2 ${theme ? 'bg-white' : 'bg-gradient-to-br from-slate-900 to-gray-800'} shadow-sm`}>
   <div className="flex-1">
-    <a className="font-bold text-pink-700 text-xl md:text-3xl">ℌ𝔬𝔟𝔟𝔶ℌ𝔲𝔟</a>
+    <a className="font-bold text-pink-700 text-xl md:text-3xl">★彡 𝔰𝔢𝔯𝔳𝔦𝔠𝔬 彡★</a>
   </div>
 
   
@@ -23,9 +23,26 @@ const Navbar = () => {
       <summary className="btn btn-sm btn-ghost text-white">☰</summary>
       <ul className={`menu menu-sm dropdown-content mt-3 p-2 shadow ${theme ? "bg-blue-900" : "bg-slate-700"} rounded-box w-52`}>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/myservice">My Groups</NavLink></li>
-        <li><NavLink to="/createservice">Create Groups</NavLink></li>
-        <li><NavLink to="/services">All Groups</NavLink></li>
+        {
+          currentUser && (
+             <li><NavLink to="/myservice">My Services</NavLink></li>
+          )
+        }
+        
+        {
+          currentUser && (
+                   <li><NavLink to="/myreviews">My Reviews</NavLink></li>
+          )
+        }
+                       
+        {
+          currentUser && (
+                       
+             <li><NavLink to="/createservice">Create Service</NavLink></li>
+          )
+        }
+       
+        <li><NavLink to="/services">All Services</NavLink></li>
         {
           currentUser
             ? <li><button onClick={handlelogout}>Logout</button></li>
@@ -58,43 +75,72 @@ const Navbar = () => {
 
    
   <div className="hidden md:flex items-center gap-6">
-    <NavLink
-      to="/"
-      className={({ isActive }) =>
-        isActive
-          ? 'text-[#D4AF37] text-sm font-bold'
-          : 'text-white text-sm font-semibold'
-      }>
-      Home
-    </NavLink>
+   <NavLink
+  to="/"
+  className={({ isActive }) =>
+    isActive
+      ? 'text-pink-600 text-sm font-bold'  // Gold color for active link, keeps your original gold
+      : 'text-green-700 hover:text-[#D4AF37] text-sm font-semibold transition-colors duration-300'  // Dark gray for inactive, gold on hover
+  }
+>
+  Home
+</NavLink>
 
+
+{
+  currentUser && (
+         
     <NavLink
       to="/myservice"
       className={({ isActive }) =>
         isActive
           ? 'text-indigo-400 text-sm font-bold'
-          : 'text-[#EFE1C6] text-sm font-semibold'
+          : 'text-[#f204ce] text-sm font-semibold'
       }>
-      My Groups
+      My Services
     </NavLink>
 
-    <NavLink
+  )
+}
+    
+
+    {
+      currentUser && (
+
+        <NavLink
       to="/createservice"
       className={({ isActive }) =>
         isActive
           ? 'text-indigo-400 text-sm font-bold'
           : 'text-red-600 text-sm font-semibold'
       }>
-      Create Groups
+      Create Service
     </NavLink>
+
+      )
+    }
+    
+
+     {
+      currentUser && ( <NavLink
+      to="/myreviews"
+      className={({ isActive }) =>
+        isActive
+          ? 'text-indigo-400 text-sm font-bold'
+          : 'text-red-600 text-sm font-semibold'
+      }>
+      My reviews
+    </NavLink>     )
+     }   
+
     <NavLink
       to="/services"
       className={({ isActive }) =>
         isActive
           ? 'text-indigo-400 text-sm font-bold'
-          : 'text-[#EFE1C6] text-sm font-semibold'
+          : 'text-[#f9a805] text-sm font-semibold'
       }>
-      All groups
+      All Services
     </NavLink>
 
     {
