@@ -26,6 +26,7 @@ const Login = () => {
         .then((userCredential) => {
                  // Signed up 
                  const user = userCredential.user;
+                 console.log(userCredential)
                  toast.success('Loged in Successfully!');
                 f?navigate(f):navigate('/')
 

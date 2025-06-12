@@ -3,7 +3,7 @@ import { valueContext } from '../Rootlayout';
 import { Navigate, useLocation } from 'react-router';
 import Swal from 'sweetalert2';
 import { FadeLoader } from 'react-spinners';
-
+import axios from 'axios';
 const Newservice = () => {
      const {currentUser,loading}=useContext(valueContext)
      const location=useLocation()
@@ -20,38 +20,78 @@ const Newservice = () => {
         return <Navigate state={{from:location.pathname}}  to={'/login'}></Navigate>
         
     }
+    const token=currentUser.accessToken
+    console.log(token)
 
-    const handleSubmit=(e)=>{
-             e.preventDefault()
+//     const handleSubmit=(e)=>{
+//              e.preventDefault()
 
-        const form =e.target;
-        const formData=new FormData(form)
-        const servicedata=Object.fromEntries(formData.entries())
-         servicedata.allReviews = [];
+//         const form =e.target;
+//         const formData=new FormData(form)
+//         const servicedata=Object.fromEntries(formData.entries())
+//          servicedata.allReviews = [];
          
  
 
-        fetch('http://localhost:3000/services',{
-            method:'POST',
+//         fetch('http://localhost:3000/services',{
+//             method:'POST',
             
-            headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(servicedata)
-        })
-        .then(res=>res.json())
-        .then(data =>{
-            Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: "Your new service has been created",
-  showConfirmButton: false,
-  timer: 1500
-});
+//             headers:{
+//                 'content-type':'application/json'
+//             },
+//             body:JSON.stringify(servicedata)
+//         })
+//         .then(res=>res.json())
+//         .then(data =>{
+//             Swal.fire({
+//   position: "top-end",
+//   icon: "success",
+//   title: "Your new service has been created",
+//   showConfirmButton: false,
+//   timer: 1500
+// });
              
-            form.reset()
-        })
+//             form.reset()
+//         })
+//     }
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const servicedata = Object.fromEntries(formData.entries());
+  servicedata.allReviews = [];
+
+  try {
+    const response = await axios.post('http://localhost:3000/services', servicedata, {
+      headers: {
+        'Content-Type': 'application/json',
+         authorization: `Bearer ${token}`
+      }
+    });
+
+    if (response.status === 200 || response.status === 201) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your new service has been created",
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      form.reset();
     }
+  } catch (error) {
+    console.error("Error creating service:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Something went wrong!",
+      text: "Failed to create the service.",
+    });
+  }
+};
+
     return (
 //         <div>
 //            <form onSubmit={handleSubmit} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">

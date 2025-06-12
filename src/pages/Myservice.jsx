@@ -3,7 +3,7 @@ import { valueContext } from '../Rootlayout';
 import { Link, Navigate, NavLink, useLoaderData, useLocation } from 'react-router';
 import Swal from 'sweetalert2';
 import { FadeLoader } from 'react-spinners';
-
+import axios from 'axios';
 const Myservice = () => {
   const { currentUser, loading } = useContext(valueContext);
   const services = useLoaderData();
@@ -23,40 +23,73 @@ const Myservice = () => {
     return <Navigate state={{from:location.pathname}} to={'/login'} />;
   }
 
-  const handleDelete=(id)=>{
+//   const handleDelete=(id)=>{
           
-    Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) {
+//     Swal.fire({
+//   title: "Are you sure?",
+//   text: "You won't be able to revert this!",
+//   icon: "warning",
+//   showCancelButton: true,
+//   confirmButtonColor: "#3085d6",
+//   cancelButtonColor: "#d33",
+//   confirmButtonText: "Yes, delete it!"
+// }).then((result) => {
+//   if (result.isConfirmed) {
 
-    fetch(`http://localhost:3000/service/${id}`,{
-        method:'DELETE'
-    })
-    .then(res=>res.json())
-    .then(data=>{
-       if(data.deletedCount){
-         Swal.fire({
-      title: "Deleted!",
-      text: "Your service has been deleted.",
-      icon: "success"
-    });
+//     fetch(`http://localhost:3000/service/${id}`,{
+//         method:'DELETE'
+//     })
+//     .then(res=>res.json())
+//     .then(data=>{
+//        if(data.deletedCount){
+//          Swal.fire({
+//       title: "Deleted!",
+//       text: "Your service has been deleted.",
+//       icon: "success"
+//     });
 
-          const remaining=services.filter(gr=>gr._id!==id)
-          setPrimaryService(remaining)
-       }
-    })
+//           const remaining=services.filter(gr=>gr._id!==id)
+//           setPrimaryService(remaining)
+//        }
+//     })
 
    
-  }
-});
-  }
+//   }
+// });
+//   }
+
+const handleDelete = async (id) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#e11d48",  // rose-600
+    cancelButtonColor: "#6b7280",   // gray-500
+    confirmButtonText: "Yes, delete it!"
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.delete(`http://localhost:3000/service/${id}`);
+
+        if (response.data.deletedCount) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your service has been deleted.",
+            icon: "success"
+          });
+
+          const remaining = services.filter(gr => gr._id !== id);
+          setPrimaryService(remaining);
+        }
+      } catch (error) {
+        console.error("Error deleting service:", error);
+        Swal.fire("Error", "Something went wrong while deleting the service.", "error");
+      }
+    }
+  });
+};
+
 
   const myServices = primaryService.filter(service => service.userEmail === currentUser.email);
 

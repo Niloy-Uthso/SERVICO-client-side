@@ -161,7 +161,7 @@ const Navbar = () => {
     {
       currentUser && (
         <div className="flex items-center gap-2">
-          <p className={`hidden md:block ${theme ? `text-white` : `text-red-200`} font-semibold`}>
+          <p className={`hidden md:block ${theme ? `text-black` : `text-red-200`} font-semibold`}>
             {currentUser.displayName}
           </p>
           <div

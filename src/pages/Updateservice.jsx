@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Navigate, useLoaderData } from 'react-router';
 import { valueContext } from '../Rootlayout';
 import Swal from 'sweetalert2';
-
+import axios from 'axios';
 const Updateservice = () => {
     const service=useLoaderData();
      const {currentUser,loading}=useContext(valueContext)
@@ -20,47 +20,97 @@ const Updateservice = () => {
             
         }
     
-const handleUpdate=(e)=>{
+// const handleUpdate=(e)=>{
    
-    e.preventDefault();
+//     e.preventDefault();
      
-     const form =e.target;
-        const formData=new FormData(form)
-        const updatedservice=Object.fromEntries(formData.entries())
+//      const form =e.target;
+//         const formData=new FormData(form)
+//         const updatedservice=Object.fromEntries(formData.entries())
          
-        fetch(`http://localhost:3000/myservice/updateService/${service._id}`,{
-            method:'PUT',
-            headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(updatedservice)
+//         fetch(`http://localhost:3000/myservice/updateService/${service._id}`,{
+//             method:'PUT',
+//             headers:{
+//                 'content-type':'application/json'
+//             },
+//             body:JSON.stringify(updatedservice)
 
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-             if(data.modifiedCount){
-                Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: "Updated",
-  showConfirmButton: false,
-  timer: 1500
-});
-             }
-             else{
-                Swal.fire({
-  position: "top-end",
-  icon: "error", 
-  title: "Oops!",
-  text: "You have not changed anything",
-  showConfirmButton: false,
-  timer: 1500
-});
-             }
-        })
+//         })
+//         .then(res=>res.json())
+//         .then(data=>{
+//             console.log(data)
+//              if(data.modifiedCount){
+//                 Swal.fire({
+//   position: "top-end",
+//   icon: "success",
+//   title: "Updated",
+//   showConfirmButton: false,
+//   timer: 1500
+// });
+//              }
+//              else{
+//                 Swal.fire({
+//   position: "top-end",
+//   icon: "error", 
+//   title: "Oops!",
+//   text: "You have not changed anything",
+//   showConfirmButton: false,
+//   timer: 1500
+// });
+//              }
+//         })
 
-}
+// }
+
+const handleUpdate = async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const updatedService = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await axios.put(
+      `http://localhost:3000/myservice/updateService/${service._id}`,
+      updatedService,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    const data = response.data;
+
+    if (data.modifiedCount) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Updated",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Oops!",
+        text: "You have not changed anything",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+
+  } catch (error) {
+    console.error("Update failed:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Something went wrong!",
+      text: "Failed to update the service.",
+    });
+  }
+};
+
 
     return (
         <div className="max-w-3xl md:mx-auto  ml-2 mr-2  my-10 p-8 bg-white rounded-xl shadow-md">

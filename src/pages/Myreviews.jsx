@@ -62,48 +62,90 @@ const MyReviews = () => {
     })
   }
 
-  const handleDelete = (serviceId, reviewEmail) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:3000/review/${serviceId}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: reviewEmail })
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.reviewed==false) {
-              const updated = primaryService.map(service => {
-                if (service._id === serviceId) {
+//   const handleDelete = (serviceId, reviewEmail) => {
+//     Swal.fire({
+//       title: 'Are you sure?',
+//       text: "You won't be able to revert this!",
+//       icon: 'warning',
+//       showCancelButton: true,
+//       confirmButtonColor: '#3085d6',
+//       cancelButtonColor: '#d33',
+//       confirmButtonText: 'Yes, delete it!'
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         fetch(`http://localhost:3000/review/${serviceId}`, {
+//           method: 'PATCH',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({ email: reviewEmail })
+//         })
+//           .then((res) => res.json())
+//           .then((data) => {
+//             if (data.reviewed==false) {
+//               const updated = primaryService.map(service => {
+//                 if (service._id === serviceId) {
 
-                    const updatedReviews = service.allReviews.filter(
-                  (r) => r.reviewerEmail !== reviewEmail
-                );
-                  return {
-                    ...service,
-                    allReviews: updatedReviews
+//                     const updatedReviews = service.allReviews.filter(
+//                   (r) => r.reviewerEmail !== reviewEmail
+//                 );
+//                   return {
+//                     ...service,
+//                     allReviews: updatedReviews
                       
 
-                  };
-                }
-                return service;
-              });
-            //  setPrimaryService(prev => prev.filter(r => r._id !== serviceId));
-               setPrimaryService(updated);
-              Swal.fire('Deleted!', 'Your review has been deleted.', 'success');
+//                   };
+//                 }
+//                 return service;
+//               });
+//             //  setPrimaryService(prev => prev.filter(r => r._id !== serviceId));
+//                setPrimaryService(updated);
+//               Swal.fire('Deleted!', 'Your review has been deleted.', 'success');
+//             }
+//           });
+//       }
+//     });
+//   };
+
+const handleDelete = (serviceId, reviewEmail) => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#e11d48', // rose-600
+    cancelButtonColor: '#6b7280',  // gray-500
+    confirmButtonText: 'Yes, delete it!'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.patch(`http://localhost:3000/review/${serviceId}`, {
+          email: reviewEmail
+        });
+
+        if (response.data.reviewed === false) {
+          const updated = primaryService.map(service => {
+            if (service._id === serviceId) {
+              const updatedReviews = service.allReviews.filter(
+                r => r.reviewerEmail !== reviewEmail
+              );
+              return {
+                ...service,
+                allReviews: updatedReviews
+              };
             }
+            return service;
           });
+
+          setPrimaryService(updated);
+          Swal.fire('Deleted!', 'Your review has been deleted.', 'success');
+        }
+      } catch (error) {
+        console.error("Error deleting review:", error);
+        Swal.fire('Error!', 'Something went wrong while deleting.', 'error');
       }
-    });
-  };
+    }
+  });
+};
+
 
   const myReviews = primaryService.flatMap(service =>
     (service.allReviews || [])

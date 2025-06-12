@@ -86,7 +86,7 @@ const Rootlayout = () => {
     
     // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
+    
     // The signed-in user info.
     const user = result.user;
     // IdP data available using getAdditionalUserInfo(result)
@@ -113,7 +113,8 @@ const context={
     forceSetCurrentUser,
     handleForgetpassword,
     handlegooglelogin,
-    theme
+    theme,
+    
     
 }
 // useEffect(() => {
@@ -133,6 +134,7 @@ useEffect(()=>{
             setCurrentUser(user)
             
             setLoading(false)
+            
               
             if (user) {
               // User is signed in, see docs for a list of available properties
