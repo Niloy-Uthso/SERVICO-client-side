@@ -84,48 +84,7 @@ const token=currentUser.accessToken
     })
   }
 
-//   const handleDelete = (serviceId, reviewEmail) => {
-//     Swal.fire({
-//       title: 'Are you sure?',
-//       text: "You won't be able to revert this!",
-//       icon: 'warning',
-//       showCancelButton: true,
-//       confirmButtonColor: '#3085d6',
-//       cancelButtonColor: '#d33',
-//       confirmButtonText: 'Yes, delete it!'
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         fetch(`https://service-site-server-five.vercel.app/review/${serviceId}`, {
-//           method: 'PATCH',
-//           headers: { 'Content-Type': 'application/json' },
-//           body: JSON.stringify({ email: reviewEmail })
-//         })
-//           .then((res) => res.json())
-//           .then((data) => {
-//             if (data.reviewed==false) {
-//               const updated = primaryService.map(service => {
-//                 if (service._id === serviceId) {
-
-//                     const updatedReviews = service.allReviews.filter(
-//                   (r) => r.reviewerEmail !== reviewEmail
-//                 );
-//                   return {
-//                     ...service,
-//                     allReviews: updatedReviews
-                      
-
-//                   };
-//                 }
-//                 return service;
-//               });
-//             //  setPrimaryService(prev => prev.filter(r => r._id !== serviceId));
-//                setPrimaryService(updated);
-//               Swal.fire('Deleted!', 'Your review has been deleted.', 'success');
-//             }
-//           });
-//       }
-//     });
-//   };
+ 
 
 const handleDelete = (serviceId, reviewEmail) => {
   Swal.fire({
@@ -133,8 +92,8 @@ const handleDelete = (serviceId, reviewEmail) => {
     text: "You won't be able to revert this!",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#e11d48', // rose-600
-    cancelButtonColor: '#6b7280',  // gray-500
+    confirmButtonColor: '#e11d48', 
+    cancelButtonColor: '#6b7280',  
     confirmButtonText: 'Yes, delete it!'
   }).then(async (result) => {
     if (result.isConfirmed) {
@@ -186,6 +145,7 @@ const handleDelete = (serviceId, reviewEmail) => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
+      <title>Myreviews|Servico</title>
       <h1 className="text-3xl font-bold text-center text-green-700 mb-6">My Reviews</h1>
 
       {myReviews.length === 0 ? (
@@ -202,18 +162,18 @@ const handleDelete = (serviceId, reviewEmail) => {
                 <p > <Rating className='ml-2'
                                      
                   initialRating={review.reviewRating}
-                  // onChange={(rate) => setRating(rate)}    // Number between 0 and 5 (can be float)
+                  // onChange={(rate) => setRating(rate)}   
                   emptySymbol={<FontAwesomeIcon icon={regularStar} className="text-sm text-gray-400" />}
                   fullSymbol={<FontAwesomeIcon icon={solidStar} className="text-sm text-yellow-400" />}
                   readonly
-                /></p> {/* Placeholder, use real value if available */}
+                /></p> 
               </div>
               <div className="flex gap-4 mt-4">
                 <button className="btn btn-outline btn-primary btn-sm" onClick={() => document.getElementById(`update-modal-${index}`).showModal()}>Update</button>
                 <button className="btn btn-outline btn-error btn-sm" onClick={() => handleDelete(service._id, review.reviewerEmail)}>Delete</button>
               </div>
 
-              {/* Update Modal */}
+            
               <dialog id={`update-modal-${index}`} className="modal">
                 <div className="modal-box">
                   <h3 className="font-bold text-lg">Update Review</h3>

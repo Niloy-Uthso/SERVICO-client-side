@@ -56,7 +56,7 @@ const Navbar = () => {
     </details>
      {
       currentUser && (
-        <div className="flex  gap-1">
+        <div className="flex items-center gap-1">
           <p className={`md:block ${theme ? `text-black` : `text-red-200`}  font-semibold`}>
             {currentUser.displayName}
           </p>

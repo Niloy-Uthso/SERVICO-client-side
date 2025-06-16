@@ -9,7 +9,9 @@ import { CiCloudMoon } from "react-icons/ci";
 import { FaCloudMoon } from "react-icons/fa";
 import { FadeLoader } from 'react-spinners';
 import axios from 'axios';
+
  export const valueContext=createContext()
+
 const Rootlayout = () => {
      const [currentUser,setCurrentUser]=useState(null)
   //  const [allstate,setAllstate]=useState()
@@ -18,12 +20,7 @@ const Rootlayout = () => {
   return savedTheme ? JSON.parse(savedTheme) : true; 
    });
    
-
-  //      useEffect(() => {
-  //   axios.get('https://service-site-server-five.vercel.app/platform-stats')
-  //     .then(res => setStats(res.data))
-  //     .catch(err => console.error(err));
-  // }, []);
+ 
 
    useEffect(() => {
   localStorage.setItem('theme', JSON.stringify(theme));
@@ -72,7 +69,7 @@ const Rootlayout = () => {
  }
 
  const handleForgetpassword=(email)=>{
-  console.log(email)
+  
   toast.success('Reset email sent to your email');
     sendPasswordResetEmail(auth, email)
   .then(() => {
@@ -122,18 +119,12 @@ const context={
     handleForgetpassword,
     handlegooglelogin,
     theme,
-    // allstate,
-    // setAllstate
+    
+    
     
     
 }
-// useEffect(() => {
-//     AOS.init({
-//       duration: 1000, // animation duration in ms
-//       once: true,     // animation only happens once
-//     });
-//   }, []);
-//   console.log()
+
 
 useEffect(()=>{
      

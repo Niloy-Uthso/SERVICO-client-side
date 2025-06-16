@@ -1,12 +1,73 @@
-# React + Vite
+# SERVICO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Service Review App
 
-Currently, two official plugins are available:
+## 📌 Project Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The Service Review App is a full-stack MERN project where users can:
+- Browse a variety of service listings
+- View detailed service descriptions
+- Join a service group
+- Submit and view reviews with ratings
+- Authenticate via Firebase and use protected routes
 
-## Expanding the ESLint configuration
+## 🔗 Live URL
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[Live Website](https://frolicking-lamington-6aed6a.netlify.app/)  
+
+
+## 🚀 Key Features
+
+- 🔐 User authentication via Firebase
+- ⭐ Dynamic review and rating system
+- ✍️ Add and edit reviews (with one review per user per service)
+- 👨‍💼 Admin can add services
+- 📊 All reviews stored and managed via MongoDB
+- 🔒 JWT-based route protection (for PATCH, POST, DELETE)
+- 📅 Real-time display of review date
+- ⚡ Axios interceptors for secure token handling
+- 🎨 TailwindCSS & DaisyUI styling
+
+## 🛠️ Technologies and Packages Used
+
+### Frontend
+- **React** `^19.1.0`
+- **React Router** `^7.6.0`
+- **TailwindCSS** `^4.1.7`
+- **DaisyUI** `^5.0.35`
+- **Vite** `^6.3.5`
+- **Firebase** `^11.7.3`
+- **Axios** `^1.9.0`
+- **React Rating** `^2.0.5`
+- **FontAwesome (solid, regular, core)** `^6.7.2`
+- **Lucide React** `^0.511.0`
+- **SweetAlert2** `^11.21.2`
+- **Lottie React** `^2.4.1`
+- **React Awesome Reveal**
+- **React CountUp**
+- **React Hot Toast**
+- **React Simple Typewriter**
+- **React Spinners**
+- **Framer Motion**
+
+### Backend
+- **Express.js**
+- **MongoDB & Mongoose**
+- **jsonwebtoken (JWT)**
+- **dotenv**
+- **cors**
+- **Firebase Admin SDK**
+
+---
+
+### Dev Tools
+
+- **ESLint** `^9.25.0`
+- **@vitejs/plugin-react**
+- **@tailwindcss/vite**
+- **eslint-plugin-react-hooks**
+- **eslint-plugin-react-refresh`
+
+---
+
+ 

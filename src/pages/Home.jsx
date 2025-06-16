@@ -148,7 +148,7 @@ useEffect(() => {
                 // services.slice(0, 6).
                services.map(service =>(
               <Fade direction="up" triggerOnce>
-          <div className={`card ${theme?`bg-base-100`:`bg-slate-800 text-gray-100`} w-80 md:w-96 h-full md:h-[380px] shadow-sm`}>
+          <div className={`card ${theme?`bg-base-100`:`bg-slate-800 text-gray-100`} w-80 md:w-96 h-full md:h-[360px] shadow-sm`}>
   <figure>
     <img className='w-full h-full'
       src= {service.serviceImage}
@@ -157,13 +157,13 @@ useEffect(() => {
   <div className="card-body">
      < h2 className="card-title">
        {service.serviceTitle}
-      <div className="badge badge-secondary">Price:{service.price}</div>
+      <div className="badge badge-secondary">Price:{service.price}$</div>
     </h2>
     <p>{service.description}</p>
     <div className="card-actions justify-end">
        
       <NavLink state={{from:location.pathname}} className="badge badge-outline text-pink-600 hover:bg-pink-200 cursor-pointer" 
- to={`/service/${service._id}`}>See More!!</NavLink>
+ to={`/service/${service._id}`}>See Details!!</NavLink>
           
     </div>
   </div>

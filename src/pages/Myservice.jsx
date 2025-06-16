@@ -23,40 +23,8 @@ const Myservice = () => {
     return <Navigate state={{from:location.pathname}} to={'/login'} />;
   }
  const token=currentUser.accessToken
-//   const handleDelete=(id)=>{
-          
-//     Swal.fire({
-//   title: "Are you sure?",
-//   text: "You won't be able to revert this!",
-//   icon: "warning",
-//   showCancelButton: true,
-//   confirmButtonColor: "#3085d6",
-//   cancelButtonColor: "#d33",
-//   confirmButtonText: "Yes, delete it!"
-// }).then((result) => {
-//   if (result.isConfirmed) {
-
-//     fetch(`https://service-site-server-five.vercel.app/service/${id}`,{
-//         method:'DELETE'
-//     })
-//     .then(res=>res.json())
-//     .then(data=>{
-//        if(data.deletedCount){
-//          Swal.fire({
-//       title: "Deleted!",
-//       text: "Your service has been deleted.",
-//       icon: "success"
-//     });
-
-//           const remaining=services.filter(gr=>gr._id!==id)
-//           setPrimaryService(remaining)
-//        }
-//     })
-
-   
-//   }
-// });
-//   }
+ 
+ 
 
 const handleDelete = async (id,email) => {
   console.log(email)
@@ -65,8 +33,8 @@ const handleDelete = async (id,email) => {
     text: "You won't be able to revert this!",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#e11d48",  // rose-600
-    cancelButtonColor: "#6b7280",   // gray-500
+    confirmButtonColor: "#e11d48",  
+    cancelButtonColor: "#6b7280",   
     confirmButtonText: "Yes, delete it!"
   }).then(async (result) => {
     if (result.isConfirmed) {
@@ -76,7 +44,7 @@ const handleDelete = async (id,email) => {
     'Content-Type': 'application/json',
     authorization: `Bearer ${token}`
   },
-  data: { email }  // send email in the request body
+  data: { email }  
 });
 
         if (response.data.deletedCount) {
@@ -132,9 +100,7 @@ const handleDelete = async (id,email) => {
                 <td>
                   <div className="flex gap-2 justify-center">
 
-                    {/* <Link state={{from:location.pathname}} to={`/service/${service._id}`}>
-                    <button class="btn btn-outline btn-info btn-sm">Detail</button>
-                    </Link> */}
+                    
                     
                     <Link  to={`/myservice/updateService/${service._id}`}> <button className="btn btn-sm btn-outline btn-primary">Update</button></Link>
                    

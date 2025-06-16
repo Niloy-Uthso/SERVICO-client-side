@@ -22,47 +22,6 @@ const Updateservice = () => {
 
          const token=currentUser.accessToken
     
-// const handleUpdate=(e)=>{
-   
-//     e.preventDefault();
-     
-//      const form =e.target;
-//         const formData=new FormData(form)
-//         const updatedservice=Object.fromEntries(formData.entries())
-         
-//         fetch(`http://localhost:3000/myservice/updateService/${service._id}`,{
-//             method:'PUT',
-//             headers:{
-//                 'content-type':'application/json'
-//             },
-//             body:JSON.stringify(updatedservice)
-
-//         })
-//         .then(res=>res.json())
-//         .then(data=>{
-//             console.log(data)
-//              if(data.modifiedCount){
-//                 Swal.fire({
-//   position: "top-end",
-//   icon: "success",
-//   title: "Updated",
-//   showConfirmButton: false,
-//   timer: 1500
-// });
-//              }
-//              else{
-//                 Swal.fire({
-//   position: "top-end",
-//   icon: "error", 
-//   title: "Oops!",
-//   text: "You have not changed anything",
-//   showConfirmButton: false,
-//   timer: 1500
-// });
-//              }
-//         })
-
-// }
 
 const handleUpdate = async (e) => {
   e.preventDefault();
@@ -155,14 +114,17 @@ const handleUpdate = async (e) => {
        
 
         <div className="grid grid-cols-2 gap-4">
+          
            <div>
           <label className="block mb-1 font-medium">Price</label>
           <input type="text" name="price" required defaultValue={service.price} className="input input-bordered w-full" />
         </div>
+          
           <div>
-            <label className="block mb-1 font-medium">Start Date</label>
+            <label className="block mb-1 font-medium">Added Date</label>
             <input type="date" name="addedDate" required defaultValue={service.addedDate} className="input input-bordered w-full" />
           </div>
+
         </div>
 
         <div>

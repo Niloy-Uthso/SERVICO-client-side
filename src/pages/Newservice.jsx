@@ -21,39 +21,7 @@ const Newservice = () => {
         
     }
     const token=currentUser.accessToken
-    console.log(token)
-
-//     const handleSubmit=(e)=>{
-//              e.preventDefault()
-
-//         const form =e.target;
-//         const formData=new FormData(form)
-//         const servicedata=Object.fromEntries(formData.entries())
-//          servicedata.allReviews = [];
-         
- 
-
-//         fetch('https://service-site-server-five.vercel.app/services',{
-//             method:'POST',
-            
-//             headers:{
-//                 'content-type':'application/json'
-//             },
-//             body:JSON.stringify(servicedata)
-//         })
-//         .then(res=>res.json())
-//         .then(data =>{
-//             Swal.fire({
-//   position: "top-end",
-//   icon: "success",
-//   title: "Your new service has been created",
-//   showConfirmButton: false,
-//   timer: 1500
-// });
-             
-//             form.reset()
-//         })
-//     }
+       
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -94,19 +62,7 @@ const handleSubmit = async (e) => {
 };
 
     return (
-//         <div>
-//            <form onSubmit={handleSubmit} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-        
-//   <label className="label">Title</label>
-//   <input type="text" className="input" name='name' placeholder="email" />
-
-//   <label className="label">Slug</label>
-//   <input type="text" className="input" name='email' placeholder="email" />
-       
-//        <button className='btn w-full'>submit</button>
-   
-// </form> 
-//         </div>
+ 
 
 
 <div className="max-w-3xl md:mx-auto ml-2 mr-2 my-10 p-8 bg-white rounded-xl shadow-md">

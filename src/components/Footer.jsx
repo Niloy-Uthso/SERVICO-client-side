@@ -20,8 +20,8 @@ const Footer = () => {
           <ul className="space-y-2 text-sm text-gray-300">
             <li><a href="/" className="hover:text-yellow-300 transition-all duration-200">Home</a></li>
             <li><a href="/services" className="hover:text-yellow-300 transition-all duration-200">Browse Services</a></li>
-            <li><a href="/myreviews" className="hover:text-yellow-300 transition-all duration-200">My Reviews</a></li>
-            <li><a href="/about" className="hover:text-yellow-300 transition-all duration-200">About Us</a></li>
+            {/* <li><a href="/myreviews" className="hover:text-yellow-300 transition-all duration-200">My Reviews</a></li> */}
+            <li><a  className="hover:text-yellow-300 transition-all duration-200">About Us</a></li>
           </ul>
         </div>
 
@@ -38,9 +38,9 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-yellow-200 mb-3">Connect With Us</h3>
           <div className="flex gap-4">
-            <a href="https://facebook.com" className="text-gray-300 hover:text-yellow-300 transition-all"><Facebook size={20} /></a>
-            <a href="https://instagram.com" className="text-gray-300 hover:text-yellow-300 transition-all"><Instagram size={20} /></a>
-            <a href="https://twitter.com" className="text-gray-300 hover:text-yellow-300 transition-all"><Twitter size={20} /></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-yellow-300 transition-all"><Facebook size={20} /></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-yellow-300 transition-all"><Instagram size={20} /></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-yellow-300 transition-all"><Twitter size={20} /></a>
           </div>
         </div>
       </div>

@@ -41,8 +41,6 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
       </div>
 
        const token=currentUser?.accessToken
-
-   
       
   const handleJoin=()=>{
     
@@ -185,7 +183,7 @@ if (!currentUser?.email) {
           <p>  <Rating className='ml-2'
                      
   initialRating={review.reviewRating}
-  // onChange={(rate) => setRating(rate)}    // Number between 0 and 5 (can be float)
+  // onChange={(rate) => setRating(rate)}    
   emptySymbol={<FontAwesomeIcon icon={regularStar} className="text-sm text-gray-400" />}
   fullSymbol={<FontAwesomeIcon icon={solidStar} className="text-sm text-yellow-400" />}
   readonly

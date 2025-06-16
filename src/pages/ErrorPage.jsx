@@ -10,10 +10,9 @@ const ErrorPage = () => {
       <p className="text-lg mt-4">404,Page not found</p>
       
       <a href="/" className="btn btn-primary mt-6">Go Home</a>
-      <div>jdjdj</div>
+       
     </div>
-    // ekfmckem
-    // fjfkejfh
+    
     
     );
 };
