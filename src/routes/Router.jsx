@@ -26,8 +26,8 @@ import MyReviews from "../pages/Myreviews";
         {
             path:"/",  
             Component:Home,
-            // loader:()=>fetch('http://localhost:3000/services'),
-             loader:()=>fetch('http://localhost:3000/services/limited')
+            // loader:()=>fetch('https://service-site-server-five.vercel.app/services'),
+             loader:()=>fetch('https://service-site-server-five.vercel.app/services/limited')
 
             //  /services/limited
 
@@ -44,7 +44,7 @@ import MyReviews from "../pages/Myreviews";
       path:"/myservice",
       Component:Myservice, 
       // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
-      loader:()=>fetch('http://localhost:3000/services'),
+      loader:()=>fetch('https://service-site-server-five.vercel.app/services'),
      },
      {
         path:"/createservice",
@@ -56,25 +56,25 @@ import MyReviews from "../pages/Myreviews";
          
         Component:Allservices,
         // loader:()=>fetch(' https://hobbyhub-server-nine.vercel.app/groups'),
-        loader:()=>fetch('http://localhost:3000/services'),
+        loader:()=>fetch('https://service-site-server-five.vercel.app/services'),
      },
      {
         path:"/service/:id",
         Component:Servicedetails,
     //    loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
-       loader: ({ params }) => fetch(`http://localhost:3000/service/${params.id}`)
+       loader: ({ params }) => fetch(`https://service-site-server-five.vercel.app/service/${params.id}`)
      },
      {
         path:"/myservice/updateService/:id",
         Component:Updateservice,
         //  loader: ({ params }) => fetch(` https://hobbyhub-server-nine.vercel.app/groups/${params.id}`)
-         loader: ({ params }) => fetch(`http://localhost:3000/service/${params.id}`)
+         loader: ({ params }) => fetch(`https://service-site-server-five.vercel.app/service/${params.id}`)
 
      },
      {
       path:"/myreviews",
       Component:MyReviews,
-      loader:()=>fetch('http://localhost:3000/services'),
+      loader:()=>fetch('https://service-site-server-five.vercel.app/services'),
      }
 
      

@@ -4,12 +4,16 @@ import { Navigate, useLoaderData, useLocation } from 'react-router';
 import Swal from 'sweetalert2';
 import { FadeLoader } from 'react-spinners';
 import axios from 'axios';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
+import Rating from 'react-rating';
 const MyReviews = () => {
   const { currentUser, loading } = useContext(valueContext);
   const services = useLoaderData();
   const [primaryService, setPrimaryService] = useState(services);
   const [updatedReviewText, setUpdatedReviewText] = useState('');
+  const [updatedReviewstar, setUpdatedReviewstar] = useState('');
   const location = useLocation();
 
   if (loading)
@@ -22,8 +26,9 @@ const MyReviews = () => {
   if (!currentUser || !currentUser.email) {
     return <Navigate state={{ from: location.pathname }} to={'/login'} />;
   }
-
-  const handleUpdate=(serviceId, reviewEmail,reviewerReview)=>{
+const token=currentUser.accessToken
+  const handleUpdate=(serviceId, reviewEmail,reviewerReview,reviewerStar)=>{
+    console.log(0)
       Swal.fire({
       title: 'Are you sure?',
       text: "You really want to update this?",
@@ -34,23 +39,40 @@ const MyReviews = () => {
       confirmButtonText: 'Yes, Update it!'
     }).then((result)=>{
         if(result.isConfirmed){
-            axios.patch(`http://localhost:3000/update/${serviceId}`,{
+            axios.patch(`https://service-site-server-five.vercel.app/update/${serviceId}`,{
+              
            
             email:reviewEmail, 
-            myreviews:reviewerReview             
-    }).then(data=>{
+            myreviews:reviewerReview ,
+            star:reviewerStar           
+    },
+
+    {
+
+               headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`, 
+        },
+            },
+  
+  
+  ).then(data=>{
         console.log(data.data)
           const updatedServices = primaryService.map(service => {
             if (service._id === serviceId) {
+
               const updatedReviews = service.allReviews.map(r =>
-                r.reviewerEmail === reviewEmail
-                  ? { ...r, reviewerReview: reviewerReview }
-                  : r
-              );
-              return { ...service, allReviews: updatedReviews };
+                r.reviewerEmail === reviewEmail ? { ...r, reviewerReview: reviewerReview }  : r );
+     
+                const updatedStar=service.allReviews.map(r=>
+                  r.reviewerEmail==reviewEmail?{...r,reviewRating:reviewerStar}:r
+                );
+           
+              return { ...service, allReviews: (updatedReviews,updatedStar) };
             }
             return service;
           });
+          console.log(updatedServices)
           setPrimaryService(updatedServices);
           Swal.fire('Updated!', 'Your review has been updated.', 'success');
 
@@ -73,7 +95,7 @@ const MyReviews = () => {
 //       confirmButtonText: 'Yes, delete it!'
 //     }).then((result) => {
 //       if (result.isConfirmed) {
-//         fetch(`http://localhost:3000/review/${serviceId}`, {
+//         fetch(`https://service-site-server-five.vercel.app/review/${serviceId}`, {
 //           method: 'PATCH',
 //           headers: { 'Content-Type': 'application/json' },
 //           body: JSON.stringify({ email: reviewEmail })
@@ -117,9 +139,18 @@ const handleDelete = (serviceId, reviewEmail) => {
   }).then(async (result) => {
     if (result.isConfirmed) {
       try {
-        const response = await axios.patch(`http://localhost:3000/review/${serviceId}`, {
+        const response = await axios.patch(`https://service-site-server-five.vercel.app/review/${serviceId}`, {
           email: reviewEmail
-        });
+        },
+         {
+               headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`, 
+        },
+            },
+      
+      
+      );
 
         if (response.data.reviewed === false) {
           const updated = primaryService.map(service => {
@@ -168,7 +199,14 @@ const handleDelete = (serviceId, reviewEmail) => {
               <h2 className="text-xl font-semibold text-indigo-700">Service Title:{service.serviceTitle}</h2>
               <p className="text-gray-700 mt-2">{review.reviewerReview}</p>
               <div className="mt-2 flex items-center gap-4">
-                <p className="text-sm text-gray-500">Rating: ⭐⭐⭐⭐☆</p> {/* Placeholder, use real value if available */}
+                <p > <Rating className='ml-2'
+                                     
+                  initialRating={review.reviewRating}
+                  // onChange={(rate) => setRating(rate)}    // Number between 0 and 5 (can be float)
+                  emptySymbol={<FontAwesomeIcon icon={regularStar} className="text-sm text-gray-400" />}
+                  fullSymbol={<FontAwesomeIcon icon={solidStar} className="text-sm text-yellow-400" />}
+                  readonly
+                /></p> {/* Placeholder, use real value if available */}
               </div>
               <div className="flex gap-4 mt-4">
                 <button className="btn btn-outline btn-primary btn-sm" onClick={() => document.getElementById(`update-modal-${index}`).showModal()}>Update</button>
@@ -180,10 +218,14 @@ const handleDelete = (serviceId, reviewEmail) => {
                 <div className="modal-box">
                   <h3 className="font-bold text-lg">Update Review</h3>
                   <form method="dialog">
-                    <textarea defaultValue={review.reviewerReview} onChange={(e) => setUpdatedReviewText(e.target.value)} className="textarea textarea-bordered w-full my-4" rows="4"></textarea>
+                    <textarea defaultValue={review.reviewerReview} onChange={(e) => setUpdatedReviewText(e.target.value)} className="textarea textarea-bordered w-full my-4" rows="3"></textarea>
+                    
+                    <h3 className="font-bold text-lg">Update star number</h3>
+                     <textarea defaultValue={review.reviewRating} onChange={(e) => setUpdatedReviewstar(e.target.value)} className="textarea textarea-bordered w-full my-4" rows="1"></textarea>
+                    
                     <div className="modal-action">
                       <button className="btn">Close</button>
-                      <button onClick={() => handleUpdate(service._id, review.reviewerEmail, updatedReviewText)} className="btn btn-primary">Update</button>
+                      <button onClick={() => handleUpdate(service._id, review.reviewerEmail, updatedReviewText,updatedReviewstar)} className="btn btn-primary">Update</button>
                     </div>
                   </form>
                 </div>

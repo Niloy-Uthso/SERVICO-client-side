@@ -19,6 +19,8 @@ const Updateservice = () => {
             return <Navigate  to={'/login'}></Navigate>
             
         }
+
+         const token=currentUser.accessToken
     
 // const handleUpdate=(e)=>{
    
@@ -75,7 +77,8 @@ const handleUpdate = async (e) => {
       updatedService,
       {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+           authorization: `Bearer ${token}`
         }
       }
     );
@@ -133,13 +136,13 @@ const handleUpdate = async (e) => {
           <label className="block mb-1 font-medium">Service Category</label>
           <select name="category" required defaultValue={service.category} className="select select-bordered w-full">
             <option value="">Select a category</option>
-            <option>Technology & IT</option>
+            <option>Technology and IT</option>
             <option>Marketing</option>
-            <option>Business & Consulting</option>
-            <option>Creative & Media</option>
+            <option>Business and Consulting</option>
+            <option>Creative and Media</option>
             <option>Home Services</option>
-            <option>Education & Coaching</option>
-            <option>Health & Wellness</option>
+            <option>Education and Coaching</option>
+            <option>Health and Wellness</option>
             <option>Others</option>
           </select>
         </div>

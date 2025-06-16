@@ -9,16 +9,17 @@ import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { updateProfile } from 'firebase/auth';
 import { auth } from '../firebase/firebase.config';
+import axios from 'axios';
 
 const Register = () => {
-    const {handleregister,handlegooglelogin,forceSetCurrentUser}=useContext(valueContext)
+    const {handleregister,handlegooglelogin,forceSetCurrentUser,setStats,stats}=useContext(valueContext)
     const [showPassword, setShowPassword] = useState(false);
     const navigate=useNavigate()
      
     
     const location=useLocation()
     
-     console.log(location)
+    //  console.log(location)
     
     const handleRegister=(e)=>{
         e.preventDefault()
@@ -27,7 +28,7 @@ const Register = () => {
        const email=e.target.email.value
        const displayName= e.target.displayName.value;
        const photoURL=e.target.photoURL.value
-       console.log( photoURL)
+       
        const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         
 if (!regex.test(password)) {
@@ -38,9 +39,11 @@ if (!regex.test(password)) {
        
        handleregister(email,password,photoURL)
        .then((userCredential) => {
-          
+        
+         
+
         const user = userCredential.user;
-        // console.log(user)
+         
         toast.success('Registered Successfully!');
           updateProfile(user, {
             displayName: displayName,
@@ -67,7 +70,7 @@ if (!regex.test(password)) {
     return (
         <>
            
-                <title>Register | HobbyHub</title>
+                <title>Register | Servico</title>
                
          <form onSubmit={handleRegister} class=" bg-base-200 border-base-300 mx-auto mt-24 rounded-box w-xs border p-4">
        

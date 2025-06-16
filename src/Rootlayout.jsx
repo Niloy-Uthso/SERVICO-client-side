@@ -8,14 +8,22 @@ import Footer from './components/Footer';
 import { CiCloudMoon } from "react-icons/ci";
 import { FaCloudMoon } from "react-icons/fa";
 import { FadeLoader } from 'react-spinners';
+import axios from 'axios';
  export const valueContext=createContext()
 const Rootlayout = () => {
      const [currentUser,setCurrentUser]=useState(null)
- 
+  //  const [allstate,setAllstate]=useState()
      const [theme, setTheme] = useState(() => {
   const savedTheme = localStorage.getItem('theme');
   return savedTheme ? JSON.parse(savedTheme) : true; 
    });
+   
+
+  //      useEffect(() => {
+  //   axios.get('https://service-site-server-five.vercel.app/platform-stats')
+  //     .then(res => setStats(res.data))
+  //     .catch(err => console.error(err));
+  // }, []);
 
    useEffect(() => {
   localStorage.setItem('theme', JSON.stringify(theme));
@@ -114,6 +122,8 @@ const context={
     handleForgetpassword,
     handlegooglelogin,
     theme,
+    // allstate,
+    // setAllstate
     
     
 }
@@ -168,7 +178,7 @@ if (loading) {
 
     return (
         <div  className={`relative ${theme ? `bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600` : `bg-neutral-900`}`}>
-               <p onClick={()=>handleTheme()} className='absolute w-8  z-50 top-4 right-56 md:left-100'>{<FaCloudMoon className={`text-3xl ${theme?`text-yellow-400 hover:text-black`:`text-black hover:text-yellow-500`}  transition duration-300`} />}</p>
+               <p onClick={()=>handleTheme()} className='absolute w-8  z-50 top-4 right-40  md:left-100'>{<FaCloudMoon className={`text-3xl ${theme?`text-yellow-400 hover:text-black`:`text-black hover:text-yellow-500`}  transition duration-300`} />}</p>
 <valueContext.Provider  value={context}>
             <Navbar></Navbar>
               <Toaster position="top-right" reverseOrder={false} />

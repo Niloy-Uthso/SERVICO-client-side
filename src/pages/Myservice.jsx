@@ -22,7 +22,7 @@ const Myservice = () => {
   if (!currentUser || !currentUser.email) {
     return <Navigate state={{from:location.pathname}} to={'/login'} />;
   }
-
+ const token=currentUser.accessToken
 //   const handleDelete=(id)=>{
           
 //     Swal.fire({
@@ -36,7 +36,7 @@ const Myservice = () => {
 // }).then((result) => {
 //   if (result.isConfirmed) {
 
-//     fetch(`http://localhost:3000/service/${id}`,{
+//     fetch(`https://service-site-server-five.vercel.app/service/${id}`,{
 //         method:'DELETE'
 //     })
 //     .then(res=>res.json())
@@ -58,7 +58,8 @@ const Myservice = () => {
 // });
 //   }
 
-const handleDelete = async (id) => {
+const handleDelete = async (id,email) => {
+  console.log(email)
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -70,7 +71,13 @@ const handleDelete = async (id) => {
   }).then(async (result) => {
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost:3000/service/${id}`);
+        const response = await axios.delete(`https://service-site-server-five.vercel.app/service/${id}`,{
+  headers: {
+    'Content-Type': 'application/json',
+    authorization: `Bearer ${token}`
+  },
+  data: { email }  // send email in the request body
+});
 
         if (response.data.deletedCount) {
           Swal.fire({
@@ -79,8 +86,9 @@ const handleDelete = async (id) => {
             icon: "success"
           });
 
-          const remaining = services.filter(gr => gr._id !== id);
+          const remaining = primaryService.filter(gr => gr._id !== id);
           setPrimaryService(remaining);
+          console.log("remaining",remaining)
         }
       } catch (error) {
         console.error("Error deleting service:", error);
@@ -92,7 +100,7 @@ const handleDelete = async (id) => {
 
 
   const myServices = primaryService.filter(service => service.userEmail === currentUser.email);
-
+      
   return (
     <div className='max-w-6xl mx-auto p-6'>
       <h1 className='text-3xl font-bold text-center text-green-700 mb-6'>My Services</h1>
@@ -130,7 +138,7 @@ const handleDelete = async (id) => {
                     
                     <Link  to={`/myservice/updateService/${service._id}`}> <button className="btn btn-sm btn-outline btn-primary">Update</button></Link>
                    
-                    <button onClick={()=>handleDelete(service._id)} className="btn btn-sm btn-outline btn-error">Delete</button>
+                    <button onClick={()=>handleDelete(service._id,service.userEmail)} className="btn btn-sm btn-outline btn-error">Delete</button>
                   </div>
                 </td>
               </tr>

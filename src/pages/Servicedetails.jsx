@@ -3,11 +3,17 @@ import { Navigate, NavLink, useLoaderData, useLocation, useNavigate, useParams }
 import { valueContext } from '../Rootlayout';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import Rating from 'react-rating';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 
 const Servicedetails = () => {
   const { currentUser, loading } = useContext(valueContext);
   
   const service = useLoaderData();
+  const [rating, setRating] = useState(0);
   const [review,setReview]=useState(service.allReviews?.includes(false))
   const [reviewcount,setReviewcount]=useState(service.allReviews.length)
   const [showoff,setShowoff]=useState(service.allReviews || []);
@@ -24,7 +30,7 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
   const location=useLocation()
    
      const f= location?.state?.from
-    // console.log(group)
+     
 
   if (loading) return<div className="h-screen flex justify-center items-center bg-black">
         <FadeLoader color="#ba1676"
@@ -34,11 +40,12 @@ setReview(service?.allReviews?.some(review => review.reviewerEmail ===currentUse
   width={8} />
       </div>
 
-  // if (!currentUser?.email) {
-  //   return <Navigate state={{from:location.pathname}} to="/login" />;
-  // }
+       const token=currentUser?.accessToken
+
+   
       
   const handleJoin=()=>{
+    
     Swal.fire({
   position: "top-end",
   icon: "success",
@@ -59,22 +66,34 @@ if (!currentUser?.email) {
    
     const x=e.target.myreview.value
     const y=e.target.date.value
-    console.log(currentUser.displayName);
+     
     
     if(currentUser?.email===service.userEmail)
-      return alert('can not')
+      return Swal.fire({
+            icon: "error",
+            title: "Your Own created Service",
+            text: "You can not review your own service.",
+          });
        
-    axios.patch(`http://localhost:3000/review/${service._id}`,{
+    axios.patch(`https://service-site-server-five.vercel.app/review/${service._id}`,
+      {
       name:currentUser?.displayName,
       email:currentUser?.email,
       myreview:x,
       photo:currentUser?.photoURL,
-      date:y
-      
-    }).then(data=>{
-        console.log(data.data)
+      date:y,
+       rating: rating 
+    },
+        {
+           headers: {
+        'Content-Type': 'application/json',
+         authorization: `Bearer ${token}`
+      }
+        }
+  ).then(data=>{
+         
          const { reviewed, newReview } = data.data;
-        // console.log(data.config.adapter.data.email)
+        
         setReview(reviewed)
         setReviewcount(prev=>reviewed? prev+1:prev-1)
 
@@ -96,38 +115,7 @@ if (!currentUser?.email) {
   }
    
   return (
-//     <div data-aos="fade-up" className="bg-base-200 py-10 px-6 rounded-xl shadow-lg max-w-4xl md:mx-auto my-12 ml-2 mr-2 ">
-//       <div className="card w-full bg-white shadow-xl">
-//         <figure className="max-h-[400px] overflow-hidden">
-//           <img src={service.imageUrl} alt={service.groupName} className="w-full object-cover" />
-//         </figure>
-//         <div className="card-body">
-//           <h2 className="card-title text-3xl font-bold text-indigo-700">{service.groupName}</h2>
-//           <div className="flex gap-3 flex-wrap mb-2">
-//             <span className="badge badge-secondary">{service.category}</span>
-//             <span className="badge badge-outline">Max Members: {service.maxMembers}</span>
-//             <span className="badge badge-outline">Start Date: {service.startDate}</span>
-//           </div>
-//           <p className="text-gray-700 text-lg">{service.description}</p>
-//           <div className="mt-4">
-//             <p><span className="font-semibold text-indigo-600">Meeting Location:</span> {service.meetingLocation}</p>
-//             <p><span className="font-semibold text-indigo-600">Created by:</span> {service.userName} ({service.userEmail})</p>
-//           </div>
-//          {new Date(service.startDate) > new Date() ? (
-//   <button onClick={()=>handleJoin()} className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
-//     Join Group
-//   </button>
-// ) : (
-//   <span className="text-red-600 font-semibold">
-//     Group is no longer active
-//   </span>
-// )}
-//         </div>
-//       </div>
-
-
-//      <NavLink to={f}> <button  class="btn btn-outline block mx-auto mt-4 btn-accent">Go Back</button></NavLink>
-//     </div>
+ 
 
          <div data-aos="fade-up" className="bg-white rounded-xl shadow-xl p-6 my-12 mx-2 max-w-4xl md:mx-auto border border-gray-200">
   <div className="overflow-hidden rounded-md">
@@ -146,29 +134,41 @@ if (!currentUser?.email) {
       <p><span className="font-medium">Website:</span> <span className="text-blue-500 underline">{service.website}</span></p>
     </div>
 
-    <div className='flex items-center justify-center gap-2 '>
+    <div className='flex  items-center justify-center gap-2 '>
 
       <form className='' onSubmit={handleReview}>   
         <div className=''>
           <label className="block mb-3 ml-24 font-medium">Put your review</label>
-          <input type="text" name="myreview" disabled={!!review} className= "input input-bordered w-full mb-3"/>
-          <input type="text" name="date" readOnly className='text-center border mb-3 ' value={new Date().toISOString().split('T')[0]}/>
+          <input type="text" name="myreview" required disabled={!!review} className= "input input-bordered w-full mb-3"/>
+        <div>
+                     <input type="text" name="date" readOnly className='text-center border mb-3 ' value={new Date().toISOString().split('T')[0]}/>
+          <Rating className='ml-2'
+                     
+  initialRating={ review?rating:0}
+  readonly={!!review}  
+  onChange={(rate) => setRating(rate)}    
+  emptySymbol={<FontAwesomeIcon icon={regularStar} className="text-2xl text-gray-400" />}
+  fullSymbol={<FontAwesomeIcon icon={solidStar} className="text-2xl text-yellow-400" />}
+  
+/>
+        </div>
+         
         </div>
         {/* <button onClick={handleReview}></button> */}
-        <button type="submit"  className="btn btn-secondary px-8 ml-16">{review?'You added a review.Can Delete now':'Add Review'}</button>
+        <button type="submit"  className="btn  btn-secondary md:px-8 md:ml-16">{review?'You added a review.Can Delete now':'Add Review'}</button>
       </form>
       
     </div>
 
-<div className='flex  justify-between'>
+<div className='flex  justify-between items-center'>
  <div className="flex flex-wrap gap-2">
       <span className="badge badge-info">{service.category}</span>
       <span className="badge badge-outline">${service.price}</span>
       <span className="badge badge-outline">Reviews: {reviewcount}</span>
     </div>
     
-  <div className="dropdown dropdown-start">
-  <div tabIndex={0} role="button" className="btn m-1">Click to see reviews ⬇️</div>
+  <div className="dropdown  w-20 md:w-48 dropdown-end md:dropdown-start">
+  <div tabIndex={0} role="button" className="btn  m-1 text-[7px] text-orange-300 md:text-sm">Click to see reviews ⬇️</div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
    {showoff.map((review, index) => (
     <li className='mb-1' key={index}>
@@ -182,6 +182,14 @@ if (!currentUser?.email) {
           <h4 className="font-semibold text-lg text-indigo-600">{review.reviewerName}</h4>
           <p className="text-gray-600 mt-1">{review.reviewerReview}</p>
           <p className='mt-1'>{review.reviewDate}</p> 
+          <p>  <Rating className='ml-2'
+                     
+  initialRating={review.reviewRating}
+  // onChange={(rate) => setRating(rate)}    // Number between 0 and 5 (can be float)
+  emptySymbol={<FontAwesomeIcon icon={regularStar} className="text-sm text-gray-400" />}
+  fullSymbol={<FontAwesomeIcon icon={solidStar} className="text-sm text-yellow-400" />}
+  readonly
+/> </p>
         </div>
       </div>
     </li>
@@ -200,7 +208,7 @@ if (!currentUser?.email) {
     </div>
 
     <div className="text-center mt-6">
-      <button onClick={()=>handleJoin} className="btn btn-primary">Request This Service</button>
+      <button onClick={()=>handleJoin()} className="btn btn-primary">Request This Service</button>
     </div>
 
     <NavLink to={f}>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState,  } from 'react';
 import { NavLink, useLoaderData, useLocation, useNavigate } from 'react-router';
 import Faq from '../components/Faq';
 import Feedback from '../components/Feedback';
@@ -7,12 +7,50 @@ import { Fade } from 'react-awesome-reveal';
 import { valueContext } from '../Rootlayout';
 import { motion } from 'framer-motion';
 import MeetOurPartners from '../components/MeetOurPartners';
+import axios from 'axios';
+import CountUp from 'react-countup';
 const Home = () => {
 
     const services=useLoaderData()
 const {theme}=useContext(valueContext)
-    const navigate=useNavigate()     
+const navigate=useNavigate()     
       const location=useLocation()
+const [stats, setStats] = useState({
+  totalServices: 0,
+  uniqueUsers: 0,
+  totalReviews: 0,
+});
+    const fetchData = async () => {
+  try {
+    const res = await axios.get("https://service-site-server-five.vercel.app/services");
+    const data = res.data;
+
+    console.log("All services:", data.length);
+
+    const uniqueEmails = new Set(data.map(service => service.userEmail));
+    console.log("Unique user emails:", uniqueEmails.size);
+
+    const totalReviews = data.reduce((sum, service) => {
+      return sum + (service.allReviews?.length || 0);
+    }, 0);
+    console.log("Total reviews:", totalReviews);
+
+      setStats({
+      totalServices: data.length,
+      uniqueUsers: uniqueEmails.size,
+      totalReviews,
+    });
+  } catch (err) {
+    console.log("Error fetching services:", err);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+    
+
+     
 // groupName: "Sketch Sunday",
 //     category: "Drawing & Painting",
 //     description: "Weekly sketch challenges and tips from pros.",
@@ -23,7 +61,7 @@ const {theme}=useContext(valueContext)
     return (
         <div className='relative'>
            <div className="absolute z-20 top-10 left-10 bg-white/80 backdrop-blur-md px-6 py-4 rounded-xl shadow-xl max-w-md">
-  <h1 className="text-xl md:text-2xl font-extrabold text-indigo-700 leading-snug">
+  <h1 className="text-sm md:text-2xl font-extrabold text-indigo-700 leading-snug">
     <Typewriter
       words={[
         'Find Trusted Services Near You!',
@@ -39,6 +77,21 @@ const {theme}=useContext(valueContext)
     />
   </h1>
 </div>
+
+ <div className='absolute z-20 top-2 right-10 flex gap-3'>
+
+ <h2 className="text-sm font-bold text-primary">Total review:
+          <CountUp end={stats.totalReviews} duration={2.5} />
+        </h2>
+        <h2 className="text-sm font-bold text-primary"> Total users:
+          <CountUp end={stats.uniqueUsers} duration={4} />
+        </h2>
+
+        <h2 className="text-sm font-bold text-primary">Total services:
+          <CountUp end={stats.totalServices} duration={4} />
+        </h2>
+ </div>
+
 
               <div className="carousel relative h-[70vh] w-full">
                
@@ -90,12 +143,12 @@ const {theme}=useContext(valueContext)
          
       </Fade>
        
- <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8'>
+ <div className='grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 md:mb-1'>
             {
                 // services.slice(0, 6).
                services.map(service =>(
               <Fade direction="up" triggerOnce>
-          <div className={`card ${theme?`bg-base-100`:`bg-slate-800 text-gray-100`} w-80 md:w-96 h-full shadow-sm`}>
+          <div className={`card ${theme?`bg-base-100`:`bg-slate-800 text-gray-100`} w-80 md:w-96 h-full md:h-[380px] shadow-sm`}>
   <figure>
     <img className='w-full h-full'
       src= {service.serviceImage}
@@ -121,7 +174,7 @@ const {theme}=useContext(valueContext)
             }
          </div>
 
-        <button  onClick={()=>navigate('/services')} class="btn btn-soft btn-secondary">See all Groups</button>
+        <button  onClick={()=>navigate('/services')} class="btn btn-soft btn-secondary">See all Services</button>
       </div>
         <MeetOurPartners></MeetOurPartners>
         <Faq></Faq>

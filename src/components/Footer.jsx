@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gradient-to-tl from-[#1e1f4b] to-[#451952] text-white py-12 px-6 mt-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         
-        {/* Logo & Description */}
+        
         <div>
           <h2 className="text-3xl font-extrabold mb-3 tracking-wide text-yellow-300">Servico</h2>
           <p className="text-sm text-gray-200 leading-relaxed">
@@ -14,7 +14,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Quick Navigation */}
+        
         <div>
           <h3 className="text-lg font-semibold text-yellow-200 mb-3">Navigation</h3>
           <ul className="space-y-2 text-sm text-gray-300">
@@ -25,7 +25,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Contact */}
+         
         <div>
           <h3 className="text-lg font-semibold text-yellow-200 mb-3">Contact</h3>
           <ul className="space-y-2 text-sm text-gray-300">
@@ -34,7 +34,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Social Links */}
+         
         <div>
           <h3 className="text-lg font-semibold text-yellow-200 mb-3">Connect With Us</h3>
           <div className="flex gap-4">

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { FadeLoader } from 'react-spinners';
 import axios from 'axios';
 const Newservice = () => {
-     const {currentUser,loading}=useContext(valueContext)
+     const {currentUser,loading,}=useContext(valueContext)
      const location=useLocation()
       if(loading)
         return<div className="h-screen flex justify-center items-center bg-black">
@@ -33,7 +33,7 @@ const Newservice = () => {
          
  
 
-//         fetch('http://localhost:3000/services',{
+//         fetch('https://service-site-server-five.vercel.app/services',{
 //             method:'POST',
             
 //             headers:{
@@ -64,7 +64,7 @@ const handleSubmit = async (e) => {
   servicedata.allReviews = [];
 
   try {
-    const response = await axios.post('http://localhost:3000/services', servicedata, {
+    const response = await axios.post('https://service-site-server-five.vercel.app/services', servicedata, {
       headers: {
         'Content-Type': 'application/json',
          authorization: `Bearer ${token}`
@@ -72,6 +72,7 @@ const handleSubmit = async (e) => {
     });
 
     if (response.status === 200 || response.status === 201) {
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -130,13 +131,13 @@ const handleSubmit = async (e) => {
           <label className="block mb-1 font-medium">Service Category</label>
           <select name="category" required className="select select-bordered w-full">
             <option value="">Select a category</option>
-            <option>Technology & IT</option>
+            <option>Technology and IT</option>
             <option>Marketing</option>
-            <option>Business & Consulting</option>
-            <option>Creative & Media</option>
+            <option>Business and Consulting</option>
+            <option>Creative and Media</option>
             <option>Home Services</option>
-            <option>Education & Coaching</option>
-            <option>Health & Wellness</option>
+            <option>Education and Coaching</option>
+            <option>Health and Wellness</option>
             <option>Others</option>
           </select>
         </div>
@@ -149,7 +150,7 @@ const handleSubmit = async (e) => {
       
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block mb-1 font-medium">Price</label>
+            <label className="block mb-1 font-medium">Price(in dollar)</label>
             <input type="number" name="price" required className="input input-bordered w-full" />
           </div>
           <div>

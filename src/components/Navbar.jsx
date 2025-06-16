@@ -20,7 +20,7 @@ const Navbar = () => {
   
   <div className="md:hidden flex gap-2">
     <details className="dropdown dropdown-end">
-      <summary className="btn btn-sm btn-ghost text-white">☰</summary>
+      <summary className="btn btn-sm btn-ghost text-red-500">☰</summary>
       <ul className={`menu menu-sm dropdown-content mt-3 p-2 shadow ${theme ? "bg-blue-900" : "bg-slate-700"} rounded-box w-52`}>
         <li><NavLink to="/">Home</NavLink></li>
         {
@@ -57,7 +57,7 @@ const Navbar = () => {
      {
       currentUser && (
         <div className="flex  gap-1">
-          <p className={` md:block ${theme ? `text-white` : `text-red-200`} font-semibold`}>
+          <p className={`md:block ${theme ? `text-black` : `text-red-200`}  font-semibold`}>
             {currentUser.displayName}
           </p>
           <div
@@ -79,8 +79,8 @@ const Navbar = () => {
   to="/"
   className={({ isActive }) =>
     isActive
-      ? 'text-pink-600 text-sm font-bold'  // Gold color for active link, keeps your original gold
-      : 'text-green-700 hover:text-[#D4AF37] text-sm font-semibold transition-colors duration-300'  // Dark gray for inactive, gold on hover
+      ? 'text-pink-600 text-sm font-bold'   
+      : 'text-green-700 hover:text-[#D4AF37] text-sm font-semibold transition-colors duration-300'  
   }
 >
   Home
