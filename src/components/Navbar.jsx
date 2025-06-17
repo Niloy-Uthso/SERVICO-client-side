@@ -14,7 +14,7 @@ const Navbar = () => {
         <>
         <div className={`navbar px-4 py-2 ${theme ? 'bg-white' : 'bg-gradient-to-br from-slate-900 to-gray-800'} shadow-sm`}>
   <div className="flex-1">
-    <a className="font-bold text-pink-700 text-xl md:text-3xl">★彡 𝔰𝔢𝔯𝔳𝔦𝔠𝔬 彡★</a>
+    <a className="font-bold text-pink-700 text-xl md:text-3xl">★彡𝔰𝔢𝔯𝔳𝔦𝔠𝔬彡★</a>
   </div>
 
   
@@ -56,9 +56,9 @@ const Navbar = () => {
     </details>
      {
       currentUser && (
-        <div className="flex items-center gap-1">
-          <p className={`md:block ${theme ? `text-black` : `text-red-200`}  font-semibold`}>
-            {currentUser.displayName}
+        <div className="flex items-center ">
+          <p className={`md:block ${theme ? `text-black` : `text-red-200`} text-[7px]  font-semibold`}>
+            {currentUser.displayName.split(' ')[0]}
           </p>
           <div
             className="btn btn-ghost btn-circle avatar tooltip tooltip-left"
