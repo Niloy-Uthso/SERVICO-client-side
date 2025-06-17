@@ -32,7 +32,8 @@ const handleUpdate = async (e) => {
 
   try {
     const response = await axios.put(
-      `http://localhost:3000/myservice/updateService/${service._id}`,
+      `https://service-site-server-five.vercel.app/myservice/updateService/${service._id}`,
+      
       updatedService,
       {
         headers: {
