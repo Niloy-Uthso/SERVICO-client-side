@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from 'react';
 import { valueContext } from '../Rootlayout';
 import { Navigate, useLoaderData, useLocation } from 'react-router';
@@ -13,7 +14,7 @@ const MyReviews = () => {
   const services = useLoaderData();
   const [primaryService, setPrimaryService] = useState(services);
   const [updatedReviewText, setUpdatedReviewText] = useState('');
-  const [updatedReviewstar, setUpdatedReviewstar] = useState('');
+  // const [updatedReviewstar, setUpdatedReviewstar] = useState('');
   const location = useLocation();
 
   if (loading)
@@ -27,7 +28,7 @@ const MyReviews = () => {
     return <Navigate state={{ from: location.pathname }} to={'/login'} />;
   }
 const token=currentUser.accessToken
-  const handleUpdate=(serviceId, reviewEmail,reviewerReview,reviewerStar)=>{
+  const handleUpdate=(serviceId, reviewEmail,reviewerReview)=>{
     console.log(0)
       Swal.fire({
       title: 'Are you sure?',
@@ -44,7 +45,7 @@ const token=currentUser.accessToken
            
             email:reviewEmail, 
             myreviews:reviewerReview ,
-            star:reviewerStar           
+                       
     },
 
     {
@@ -64,11 +65,9 @@ const token=currentUser.accessToken
               const updatedReviews = service.allReviews.map(r =>
                 r.reviewerEmail === reviewEmail ? { ...r, reviewerReview: reviewerReview }  : r );
      
-                const updatedStar=service.allReviews.map(r=>
-                  r.reviewerEmail==reviewEmail?{...r,reviewRating:reviewerStar}:r
-                );
+                
            
-              return { ...service, allReviews: (updatedReviews,updatedStar) };
+              return { ...service, allReviews: updatedReviews };
             }
             return service;
           });
@@ -180,12 +179,10 @@ const handleDelete = (serviceId, reviewEmail) => {
                   <form method="dialog">
                     <textarea defaultValue={review.reviewerReview} onChange={(e) => setUpdatedReviewText(e.target.value)} className="textarea textarea-bordered w-full my-4" rows="3"></textarea>
                     
-                    <h3 className="font-bold text-lg">Update star number</h3>
-                     <textarea defaultValue={review.reviewRating} onChange={(e) => setUpdatedReviewstar(e.target.value)} className="textarea textarea-bordered w-full my-4" rows="1"></textarea>
-                    
+                     
                     <div className="modal-action">
                       <button className="btn">Close</button>
-                      <button onClick={() => handleUpdate(service._id, review.reviewerEmail, updatedReviewText,updatedReviewstar)} className="btn btn-primary">Update</button>
+                      <button onClick={() => handleUpdate(service._id, review.reviewerEmail, updatedReviewText)} className="btn btn-primary">Update</button>
                     </div>
                   </form>
                 </div>
