@@ -11,6 +11,14 @@ The Service Review App is a full-stack MERN project where users can:
 - Submit and view reviews with ratings
 - Authenticate via Firebase and use protected routes
 
+
+
+## 📸 Screenshot
+
+![Servico Screensho](https://i.ibb.co/93Vr80BW/Screenshot-2025-06-25-175601.png)
+
+---
+
 ## 🔗 Live URL
 
 [Live Website](https://frolicking-lamington-6aed6a.netlify.app/)  
@@ -59,6 +67,37 @@ The Service Review App is a full-stack MERN project where users can:
 - **Firebase Admin SDK**
 
 ---
+
+## 📦 Dependencies
+
+```json
+{
+  "react": "^19.1.0",
+  "firebase": "^11.7.3",
+  "axios": "^1.9.0",
+  "react-router": "^7.6.0",
+  "tailwindcss": "^4.1.7",
+  "daisyui": "^5.0.35",
+  "framer-motion": "^12.17.0",
+  "react-hot-toast": "^2.5.2",
+  "react-countup": "^6.5.3",
+  "react-simple-typewriter": "^5.0.1",
+  "sweetalert2": "^11.21.2",
+  "lottie-react": "^2.4.1",
+  "react-spinners": "^0.17.0",
+  "lucide-react": "^0.511.0"
+}
+```
+---
+
+## 🔧 How to Run Locally
+
+### 🔽 Clone & Install
+```bash
+git clone https://github.com/Niloy-Uthso/Event-Explorer-repo.git
+cd Event-Explorer-repo
+npm install
+```
 
 ### Dev Tools
 
