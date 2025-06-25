@@ -94,8 +94,8 @@ The Service Review App is a full-stack MERN project where users can:
 
 ### 🔽 Clone & Install
 ```bash
-git clone https://github.com/Niloy-Uthso/Event-Explorer-repo.git
-cd Event-Explorer-repo
+git clone https://github.com/Niloy-Uthso/SERVICO-client-side.git
+cd SERVICO-client-side
 npm install
 ```
 
