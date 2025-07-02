@@ -48,7 +48,7 @@ const MeetOurPartners = () => {
         transition={{ duration: 4 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl font-extrabold mb-4 tracking-tight">Meet Our Partners</h2>
+        <h2 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-500 mb-4 tracking-tight">Meet Our Partners</h2>
         <p className="text-lg opacity-80 mb-10 max-w-2xl mx-auto">
           Our journey is supported by amazing collaborators who help bring value to the community.
         </p>

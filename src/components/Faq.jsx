@@ -47,7 +47,7 @@ const Faq = () => {
           theme ? 'text-indigo-700' : 'text-cyan-300'
         }`}
       >
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-500">
           <Typewriter
             words={['Frequently Asked Questions']}
             loop={100}

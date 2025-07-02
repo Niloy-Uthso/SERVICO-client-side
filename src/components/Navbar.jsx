@@ -1,20 +1,34 @@
  import React, { useContext } from 'react';
 import { Navigate, NavLink, useLocation, useNavigate } from 'react-router';
 import { valueContext } from '../Rootlayout';
+import { FaCloudMoon } from 'react-icons/fa';
 
 const Navbar = () => {
     const navigate=useNavigate()
     const {pathname}=useLocation()
 
-    const {handlelogout,currentUser,theme}=useContext(valueContext)
+    const {handlelogout,currentUser,theme,handleTheme}=useContext(valueContext)
      
     
      
     return (
         <>
-        <div className={`navbar px-4 py-2 ${theme ? 'bg-white' : 'bg-gradient-to-br from-slate-900 to-gray-800'} shadow-sm`}>
+        <div className={`navbar sticky top-0 z-50 px-4 py-2 ${theme ? 'bg-white' : 'bg-gradient-to-br from-slate-900 to-gray-800'} shadow-sm`}>
   <div className="flex-1">
     <a className="font-bold text-pink-700 text-xl md:text-3xl">★彡𝔰𝔢𝔯𝔳𝔦𝔠𝔬彡★</a>
+     <button
+    onClick={handleTheme}
+    className="ml-4 z-[999] md:ml-8"
+    aria-label="Toggle Theme"
+  >
+    <FaCloudMoon
+      className={`text-3xl ${
+        theme
+          ? 'text-yellow-400 hover:text-black'
+          : 'text-black hover:text-yellow-500'
+      } transition duration-300`}
+    />
+  </button>
   </div>
 
   
@@ -23,6 +37,7 @@ const Navbar = () => {
       <summary className="btn btn-sm btn-ghost text-red-500">☰</summary>
       <ul className={`menu menu-sm dropdown-content mt-3 p-2 shadow ${theme ? "bg-blue-900" : "bg-slate-700"} rounded-box w-52`}>
         <li><NavLink to="/">Home</NavLink></li>
+         <li><NavLink to="/about">About</NavLink></li>
         {
           currentUser && (
              <li><NavLink to="/myservice">My Services</NavLink></li>
@@ -84,6 +99,16 @@ const Navbar = () => {
   }
 >
   Home
+</NavLink>
+<NavLink
+  to="/about"
+  className={({ isActive }) =>
+    isActive
+      ? 'text-pink-600 text-sm font-bold'   
+      : 'text-green-700 hover:text-[#D4AF37] text-sm font-semibold transition-colors duration-300'  
+  }
+>
+  About
 </NavLink>
 
 

@@ -13,6 +13,7 @@ import Allservices from "../pages/Allservices";
 import Servicedetails from "../pages/Servicedetails";
 import Updateservice from "../pages/Updateservice";
 import MyReviews from "../pages/Myreviews";
+import About from "../pages/About ";
 
  
 
@@ -75,6 +76,10 @@ import MyReviews from "../pages/Myreviews";
       path:"/myreviews",
       Component:MyReviews,
       loader:()=>fetch('https://service-site-server-five.vercel.app/services'),
+     },
+     {
+      path:"/about",
+      Component:About
      }
 
      

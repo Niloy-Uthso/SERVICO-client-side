@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import MeetOurPartners from '../components/MeetOurPartners';
 import axios from 'axios';
 import CountUp from 'react-countup';
+import Promotional from '../components/Promotional';
 const Home = () => {
 
     const services=useLoaderData()
@@ -139,7 +140,7 @@ useEffect(() => {
 
 
          <Fade direction="up" triggerOnce>
-        <h2 className="text-3xl font-extrabold text-white drop-shadow-md tracking-wide">Featured Services</h2>
+        <h2 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-500 drop-shadow-md tracking-wide">Featured Services</h2>
          
       </Fade>
        
@@ -177,9 +178,13 @@ useEffect(() => {
         <button  onClick={()=>navigate('/services')} class="btn btn-soft btn-secondary">See all Services</button>
       </div>
         <MeetOurPartners></MeetOurPartners>
+       <Promotional></Promotional>
+       
         <Faq></Faq>
 
         <Feedback></Feedback>
+
+        
            
         </div>
     );
