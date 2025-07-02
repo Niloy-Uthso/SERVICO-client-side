@@ -166,7 +166,7 @@ if (!currentUser?.email) {
     </div>
     
   <div className="dropdown  w-20 md:w-48 dropdown-end md:dropdown-start">
-  <div tabIndex={0} role="button" className="btn  m-1 text-[7px] text-orange-300 md:text-sm">Click to see reviews ⬇️</div>
+  <div tabIndex={0} role="button" className="btn  m-1 text-[7px] text-orange-300 md:text-sm">See reviews ⬇️</div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
    {showoff.map((review, index) => (
     <li className='mb-1' key={index}>

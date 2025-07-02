@@ -14,6 +14,7 @@ const About = () => {
           : 'bg-gradient-to-br from-slate-900 to-gray-900'
       }`}
     >
+      <title>About|Servico</title>
       <h1
         className={`text-4xl font-extrabold text-center mb-10 tracking-tight ${
           theme ? 'text-indigo-700' : 'text-white'
