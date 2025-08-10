@@ -93,9 +93,9 @@ const Navbar = () => {
    <NavLink
   to="/"
   className={({ isActive }) =>
-    isActive
-      ? 'text-pink-600 text-sm font-bold'   
-      : 'text-green-700 hover:text-[#D4AF37] text-sm font-semibold transition-colors duration-300'  
+     isActive
+          ? 'text-green-700 text-sm font-bold'
+          : 'text-red-600 text-sm font-semibold'
   }
 >
   Home
@@ -103,9 +103,9 @@ const Navbar = () => {
 <NavLink
   to="/about"
   className={({ isActive }) =>
-    isActive
-      ? 'text-pink-600 text-sm font-bold'   
-      : 'text-green-700 hover:text-[#D4AF37] text-sm font-semibold transition-colors duration-300'  
+     isActive
+          ? 'text-green-700 text-sm font-bold'
+          : 'text-red-600 text-sm font-semibold'
   }
 >
   About
@@ -119,8 +119,8 @@ const Navbar = () => {
       to="/myservice"
       className={({ isActive }) =>
         isActive
-          ? 'text-indigo-400 text-sm font-bold'
-          : 'text-[#f204ce] text-sm font-semibold'
+          ? 'text-green-700 text-sm font-bold'
+          : 'text-red-600 text-sm font-semibold'
       }>
       My Services
     </NavLink>
@@ -136,7 +136,7 @@ const Navbar = () => {
       to="/createservice"
       className={({ isActive }) =>
         isActive
-          ? 'text-indigo-400 text-sm font-bold'
+          ? 'text-green-700 text-sm font-bold'
           : 'text-red-600 text-sm font-semibold'
       }>
       Create Service
@@ -151,7 +151,7 @@ const Navbar = () => {
       to="/myreviews"
       className={({ isActive }) =>
         isActive
-          ? 'text-indigo-400 text-sm font-bold'
+          ? 'text-green-700 text-sm font-bold'
           : 'text-red-600 text-sm font-semibold'
       }>
       My reviews
@@ -162,8 +162,8 @@ const Navbar = () => {
       to="/services"
       className={({ isActive }) =>
         isActive
-          ? 'text-indigo-400 text-sm font-bold'
-          : 'text-[#f9a805] text-sm font-semibold'
+          ? 'text-green-700 text-sm font-bold'
+          : 'text-red-600 text-sm font-semibold'
       }>
       All Services
     </NavLink>
