@@ -97,7 +97,7 @@ if (!regex.test(password)) {
        <label className="label">Name</label>
        <input  type="text"  class="input"  name='displayName'  placeholder="Enter name"/>
        <label className="label">Photo URL</label>
-       <input  type="url"  class="input"  name='photoURL'  placeholder="Enter photo URL"/>
+       <input  type="url"  className="input placeholder:text-[8px]" name='photoURL'  placeholder="Host your image in imgbb or in any other site and provide the URL"/>
      
       <div className='flex justify-between items-center  gap-3'>
       <button type='submit' class="btn btn-neutral mt-4"> Register</button>
